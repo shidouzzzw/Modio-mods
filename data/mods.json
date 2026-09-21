@@ -13,17 +13,6 @@
     "icon": "https://github.com/shidouzzzw/Modio-mods/raw/refs/heads/main/icons/action-and-stuff.png"
   },
   {
-    "id": 14,
-    "name": "Better on Bedrock",
-    "desc": "Bedrock deneyimini geliştiren kapsamlı kalite of life modu.",
-    "platform": "bedrock",
-    "color": "teal",
-    "downloads": "2.8M",
-    "rating": "4.7",
-    "version": "1.21",
-    "author": "PoeticRainbow"
-  },
-  {
     "id": 15,
     "name": "Utilities+",
     "desc": "Bedrock için kullanışlı araçlar ve yardımcılar koleksiyonu.",
