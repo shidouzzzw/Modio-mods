@@ -13,17 +13,6 @@
     "icon": "https://github.com/shidouzzzw/Modio-mods/raw/refs/heads/main/icons/action-and-stuff.png"
   },
   {
-    "id": 20,
-    "name": "Dokucraft Bedrock",
-    "desc": "Ortaçağ esintili, detaylı ve atmosferik bir doku paketi. Klasik bir Java paketinin Bedrock'a taşınmış hali.",
-    "platform": "bedrocktexture",
-    "color": "purple",
-    "downloads": "1.2M",
-    "rating": "4.5",
-    "version": "1.20",
-    "author": "Dokucraft Team"
-  },
-  {
     "id": 21,
     "name": "Better Vanilla Bedrock",
     "desc": "Vanilla dokuları hafifçe iyileştirip netleştiren, performans dostu bir doku paketi.",
