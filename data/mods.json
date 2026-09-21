@@ -13,17 +13,6 @@
     "icon": "https://github.com/shidouzzzw/Modio-mods/raw/refs/heads/main/icons/action-and-stuff.png"
   },
   {
-    "id": 21,
-    "name": "Better Vanilla Bedrock",
-    "desc": "Vanilla dokuları hafifçe iyileştirip netleştiren, performans dostu bir doku paketi.",
-    "platform": "bedrocktexture",
-    "color": "teal",
-    "downloads": "640K",
-    "rating": "4.4",
-    "version": "1.21",
-    "author": "BV Studio"
-  },
-  {
     "id": 22,
     "name": "System Dynamic Light",
     "desc": "System Dynamic Light: Elindeki veya yakındaki ışık yayan eşyalar (meşale, fener vb.) hareket ederken gerçek zamanlı çevreyi aydınlatır. Böylece ışık koymadan etrafı görebilirsin.",
