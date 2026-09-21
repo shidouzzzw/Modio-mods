@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Modio — Minecraft Modları</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffffff;--surface:#ffffff;--surface-2:#ffffff;--text:#1d1d1f;--text-secondary:#6e6e73;--border:#e5e5ea;--accent:#007aff;--accent-soft:#e8f1ff;--radius:16px;--radius-lg:22px;--transition:0.22s cubic-bezier(0.25,0.1,0.25,1);--safe-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{--bg:#000000;--surface:#1c1c1e;--surface-2:#2c2c2e;--text:#f5f5f7;--text-secondary:#98989d;--border:#38383a;--accent:#0a84ff;--accent-soft:rgba(10,132,255,.18)}
+:root[data-theme="dark"] body{background:var(--bg)}
+:root[data-theme="dark"] .header{background:rgba(28,28,30,.86)}
+:root[data-theme="dark"] .search-input{background:var(--surface)}
+:root[data-theme="dark"] .nav-link:hover,:root[data-theme="dark"] .nav-link.active{background:var(--surface)}
+:root[data-theme="dark"] .mod-thumb{background:var(--surface-2)!important}
+:root[data-theme="dark"] .cat-card{background:var(--surface-2)!important}
+:root[data-theme="dark"] .num,:root[data-theme="dark"] .back-btn{background:var(--surface-2)}
+:root[data-theme="dark"] .back-btn:hover{background:var(--surface)}
+:root[data-theme="dark"] .filter-chip{background:var(--surface)!important;color:var(--text)!important;border-color:var(--border)!important}
+:root[data-theme="dark"] .filter-chip.active{background:var(--text)!important;color:#000!important;border-color:var(--text)!important}
+:root[data-theme="dark"] .bottom-nav{background:rgba(28,28,30,.72)!important;border-color:rgba(255,255,255,.08)!important}
+:root[data-theme="dark"] .search-page-input input{background:var(--surface)!important;color:var(--text)!important}
+:root[data-theme="dark"] .btn-secondary:hover{background:var(--surface)}
+:root[data-theme="dark"] .modal-icon{background:var(--surface)}
+:root[data-theme="dark"] .logo-icon{color:#000}
+:root[data-theme="dark"] .fav-btn{background:rgba(28,28,30,.9);border-color:var(--border)}
+html{background:var(--bg);transition:background .25s ease}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;background:#ffffff;color:var(--text);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-bottom:calc(88px + var(--safe-bottom))}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)}}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+.animate-in{animation:fadeUp .3s var(--transition) both}.delay-1{animation-delay:.04s}.delay-2{animation-delay:.08s}
+.header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border)}
+.header-inner{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);font-weight:700;font-size:1.25rem;letter-spacing:-.02em;flex-shrink:0;cursor:pointer}
+.logo-icon{width:32px;height:32px;background:var(--text);border-radius:9px;display:grid;place-items:center;color:#fff;font-size:15px}
+.search-wrap{flex:1;max-width:420px;position:relative}
+.search-input{width:100%;padding:10px 16px 10px 40px;border:1px solid var(--border);border-radius:12px;background:#ffffff;font-size:15px;font-family:inherit;color:var(--text);outline:none;transition:background var(--transition),border-color var(--transition),box-shadow var(--transition)}
+.search-input::placeholder{color:var(--text-secondary)}.search-input:focus{background:var(--surface);border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,122,255,.15)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-secondary);pointer-events:none}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-link{padding:8px 14px;border-radius:10px;text-decoration:none;color:var(--text-secondary);font-size:14px;font-weight:500;cursor:pointer;transition:color var(--transition),background var(--transition)}
+.nav-link:hover,.nav-link.active{color:var(--text);background:#ffffff}
+.pc-only-nav{display:none}
+.theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--text);cursor:pointer;flex-shrink:0;margin-left:auto;transition:background .2s ease,transform .15s ease}
+.theme-toggle:active{transform:scale(.9)}
+.page{display:none;animation:pageIn .16s ease both}.page.active{display:block}
+.hero{max-width:1100px;margin:0 auto;padding:48px 20px 28px;text-align:center}
+.hero h1{font-size:clamp(2rem,5vw,2.75rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:12px}
+.hero p{font-size:1.125rem;color:var(--text-secondary);max-width:480px;margin:0 auto}
+.section{max-width:1100px;margin:0 auto;padding:0 20px 48px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.section-title{font-size:1.375rem;font-weight:650;letter-spacing:-.02em}
+.see-all{font-size:14px;font-weight:500;color:var(--accent);cursor:pointer}.see-all:hover{opacity:.7}
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.mod-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform var(--transition),border-color var(--transition);display:flex;flex-direction:column;position:relative}
+.mod-card:hover{transform:translateY(-3px);border-color:#c7c7cc}.mod-card:active{transform:scale(.985)}
+.mod-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;background:#ffffff}
+.mod-thumb.blue{background:#f5f9ff}.mod-thumb.orange{background:#fffaf5}.mod-thumb.purple{background:#faf7ff}.mod-thumb.teal{background:#f5fbf9}.mod-thumb.rose{background:#fff7f9}.mod-thumb.green{background:#f5faf6}
+.fav-btn{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.92);display:grid;place-items:center;cursor:pointer;z-index:2;color:var(--text-secondary)}.fav-btn.active{color:#ff3b30}
+.icon-avatar{border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;flex-shrink:0}
+.mod-body{padding:16px;flex:1;display:flex;flex-direction:column}
+.mod-title{font-size:16px;font-weight:600;letter-spacing:-.01em;margin-bottom:4px}
+.mod-desc{font-size:13px;color:var(--text-secondary);line-height:1.45;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.mod-meta{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-secondary)}
+.badge{display:inline-flex;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;background:var(--accent-soft);color:var(--accent)}
+.featured-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;scroll-snap-type:x mandatory}.featured-scroll::-webkit-scrollbar{display:none}
+.featured-card{flex:0 0 300px;scroll-snap-align:start;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform var(--transition),border-color var(--transition)}.featured-card:hover{transform:translateY(-3px);border-color:#c7c7cc}
+.featured-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:56px;background:#ffffff}
+.featured-body{padding:14px 16px 16px}.featured-title{font-size:15px;font-weight:600;margin-bottom:4px}.featured-desc{font-size:13px;color:var(--text-secondary);-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+.bottom-nav-wrap{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:0 14px calc(12px + var(--safe-bottom));pointer-events:none}
+.bottom-nav{pointer-events:auto;display:flex;max-width:420px;margin:0 auto;background:rgba(255,255,255,0.72);backdrop-filter:saturate(180%) blur(28px);-webkit-backdrop-filter:saturate(180%) blur(28px);border:1px solid rgba(0,0,0,.07);border-radius:22px;padding:6px;justify-content:space-between;position:relative;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.nav-indicator{position:absolute;top:6px;left:6px;bottom:6px;width:calc((100% - 12px) / 5);background:rgba(0,122,255,.12);border-radius:16px;transition:transform .32s cubic-bezier(.32,.72,0,1);z-index:0;pointer-events:none}
+.bottom-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--text-secondary);font-size:10px;font-weight:500;padding:8px 4px;border-radius:16px;transition:color .25s ease;cursor:pointer;background:transparent;border:none;font-family:inherit;position:relative;z-index:1;min-height:52px}
+.bottom-item svg{width:22px;height:22px;stroke-width:1.7;transition:transform .25s ease,stroke .25s ease}
+.bottom-item.active{color:var(--accent)}.bottom-item.active svg{transform:scale(1.06);stroke:var(--accent)}.bottom-item:active{transform:scale(.94)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal{background:var(--surface);width:100%;max-width:480px;max-height:85vh;border-radius:20px 20px 0 0;padding:12px 20px 32px;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1);overflow-y:auto;touch-action:none;will-change:transform;border:1px solid var(--border);border-bottom:none}
+.modal-overlay.open .modal{transform:translateY(0)}.modal.dragging{transition:none}
+.modal-handle{width:36px;height:5px;background:#d1d1d6;border-radius:3px;margin:0 auto 20px;cursor:grab}
+.modal-header{display:flex;gap:16px;margin-bottom:20px}
+.modal-icon{width:72px;height:72px;border-radius:16px;display:grid;place-items:center;font-size:36px;flex-shrink:0;background:#ffffff}
+.modal-info h2{font-size:1.25rem;font-weight:650;letter-spacing:-.02em;margin-bottom:4px}.modal-info p{font-size:13px;color:var(--text-secondary)}
+.modal-stats{display:flex;gap:20px;margin:16px 0;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{text-align:center}.stat-value{font-size:16px;font-weight:600}.stat-label{font-size:11px;color:var(--text-secondary)}
+.modal-desc{font-size:15px;color:var(--text);line-height:1.55;margin-bottom:24px}
+.btn-primary{display:block;width:100%;padding:14px;border:none;border-radius:14px;background:var(--accent);color:#fff;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity .2s ease,transform .15s ease}.btn-primary:hover{opacity:.92}.btn-primary:active{transform:scale(.98)}
+.btn-secondary{display:block;width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:transparent;color:var(--text);font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;margin-top:10px;transition:background .2s ease}.btn-secondary:hover{background:#f5f5f7}
+:root[data-theme="dark"] .btn-secondary:hover{background:var(--surface)}
+.footer{max-width:1100px;margin:0 auto;padding:32px 20px 24px;text-align:center;color:var(--text-secondary);font-size:13px;border-top:1px solid var(--border)}
+.site-footer{max-width:1100px;margin:0 auto;padding:40px 20px 32px;border-top:1px solid var(--border)}
+.footer-links{display:flex;flex-wrap:wrap;gap:18px 64px;margin-bottom:32px}
+.footer-col{display:flex;flex-direction:column;gap:16px;min-width:160px}
+.footer-link{font-size:15px;color:var(--text);text-decoration:none;cursor:pointer;font-weight:500;background:none;border:none;font-family:inherit;text-align:left;padding:0;width:fit-content;transition:color .2s ease}
+.footer-link:hover{color:var(--accent)}
+.footer-social{display:flex;flex-direction:column;gap:16px;margin-bottom:28px}
+.social-link{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-size:15px;font-weight:500;width:fit-content}
+.social-link:hover{color:var(--accent)}
+.social-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--text);color:var(--bg)}
+.social-icon svg{width:16px;height:16px}
+.social-icon.wa{background:transparent;border:1.6px solid var(--text);color:var(--text)}
+.footer-note{font-size:13px;color:var(--text-secondary)}
+:root[data-theme="dark"] .social-icon.wa{border-color:var(--text)}
+.info-modal-body{font-size:15px;line-height:1.65;color:var(--text)}
+.empty-state{text-align:center;padding:64px 20px;color:var(--text-secondary)}.empty-state .icon{font-size:48px;margin-bottom:16px}
+.page-title{max-width:1100px;margin:0 auto;padding:28px 20px 8px}.page-title h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}.page-title p{color:var(--text-secondary);margin-top:6px;font-size:15px}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;max-width:1100px;margin:0 auto;padding:20px}
+.cat-card{border-radius:var(--radius);padding:32px 16px 26px;text-align:center;cursor:pointer;transition:transform var(--transition);border:1px solid var(--border);background:var(--surface)}.cat-card:hover{transform:translateY(-3px)}.cat-card:active{transform:scale(.97)}
+.cat-card .icon{font-size:42px;margin-bottom:14px}.cat-card h3{font-size:16px;font-weight:650;margin-bottom:4px}.cat-card span{font-size:13px;color:var(--text-secondary)}
+.cat-card.c-javaclient{background:#e7f8ec}.cat-card.c-bedrock{background:#e8f1ff}.cat-card.c-bedrocktexture{background:#fff3e6}
+.cat-folder-icon{display:flex;justify-content:center;margin-bottom:14px}
+.numbered-list{max-width:700px;margin:0 auto;padding:8px 20px 40px}
+.numbered-item{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform var(--transition),border-color var(--transition)}.numbered-item:hover{transform:translateY(-2px);border-color:#c7c7cc}
+.num{width:32px;height:32px;border-radius:10px;background:#ffffff;display:grid;place-items:center;font-weight:700;font-size:14px;color:var(--text-secondary);flex-shrink:0}
+.numbered-item .mod-icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:24px;flex-shrink:0;background:#ffffff}
+.numbered-info{flex:1;min-width:0}.numbered-info h4{font-size:15px;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.numbered-info p{font-size:12px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.numbered-meta{font-size:12px;color:var(--text-secondary);flex-shrink:0}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 14px 9px 10px;border-radius:12px;background:#ffffff;border:1px solid var(--border);font-size:14px;font-weight:550;font-family:inherit;color:var(--text);cursor:pointer;margin-bottom:18px;transition:background var(--transition),transform .15s ease}
+.back-btn:hover{background:#f5f5f5}.back-btn:active{transform:scale(.96)}.back-btn svg{width:18px;height:18px;stroke:var(--text)}
+.search-page-input{max-width:1100px;margin:0 auto;padding:12px 20px 24px;position:relative}
+.search-page-input input{width:100%;padding:16px 20px 16px 48px;border:1px solid var(--border);border-radius:var(--radius-lg);background:#ffffff;font-size:16px;font-family:inherit;outline:none}
+.search-page-input input:focus{background:var(--surface);border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,122,255,.12)}
+.search-page-input .search-icon{left:36px;top:50%;transform:translateY(-50%)}
+.filter-row{max-width:1100px;margin:0 auto;padding:0 20px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filter-label{font-size:12px;font-weight:600;color:var(--text-secondary);margin-right:4px}
+.filter-chip{padding:8px 14px;border-radius:100px;border:1px solid var(--border);background:#fff;font-size:13px;font-weight:500;font-family:inherit;color:var(--text);cursor:pointer;transition:all .2s ease}
+.filter-chip:hover{border-color:#c7c7cc}
+.filter-chip.active{background:var(--text);color:#fff;border-color:var(--text)}
+.guide-list{max-width:700px;margin:0 auto;padding:12px 20px 40px}
+.guide-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
+.guide-item h3{font-size:16px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:10px}.guide-item p{font-size:14px;color:var(--text-secondary);line-height:1.5}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .search-wrap{display:none}
+  .hero{padding-top:32px}
+  .mod-grid{grid-template-columns:1fr}
+  .section{padding-bottom:32px}
+  .pc-only-nav{display:none!important}
+}
+@media(min-width:769px){
+  .modal{border-radius:20px;margin-bottom:40px;max-height:80vh;max-width:440px}
+  .modal-overlay{align-items:center}
+  .bottom-nav{max-width:460px}
+  .modal-handle{display:none}
+  .mod-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+  .featured-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+  .cat-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.05)}
+  .numbered-item:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.04)}
+  :root[data-theme="dark"] .mod-card:hover,
+  :root[data-theme="dark"] .featured-card:hover,
+  :root[data-theme="dark"] .cat-card:hover,
+  :root[data-theme="dark"] .numbered-item:hover{box-shadow:0 8px 28px rgba(0,0,0,.35)}
+}
+/* PC / Desktop — bottom nav gizle, üst navigasyon + geniş layout */
+@media(min-width:900px){
+  body{padding-bottom:0}
+  .bottom-nav-wrap{display:none!important}
+  .header-inner{max-width:1200px;padding:14px 28px}
+  .search-wrap{max-width:480px}
+  .nav-links{gap:6px}
+  .nav-link{padding:9px 16px;font-size:14.5px}
+  .hero{max-width:1200px;padding:56px 28px 36px}
+  .hero h1{font-size:clamp(2.25rem,4vw,3rem)}
+  .section{max-width:1200px;padding:0 28px 56px}
+  .page-title{max-width:1200px;padding:36px 28px 12px}
+  .mod-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+  .featured-scroll{gap:18px}
+  .featured-card{flex:0 0 280px}
+  .cat-grid{max-width:1200px;padding:24px 28px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
+  .numbered-list{max-width:800px;padding:12px 28px 48px}
+  .search-page-input{max-width:1200px;padding:16px 28px 28px}
+  .filter-row{max-width:1200px;padding:0 28px 20px}
+  .site-footer{max-width:1200px;padding:48px 28px 40px}
+  .guide-list{max-width:760px;padding:16px 28px 48px}
+  .footer-social{flex-direction:row;gap:28px;flex-wrap:wrap}
+  /* Üst nav'a Rehber + Ara ekle (PC) */
+  .pc-only-nav{display:inline-flex!important}
+}
+@media(min-width:1200px){
+  .mod-grid{grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+  .header-inner,.hero,.section,.page-title,.site-footer,.search-page-input,.filter-row,.cat-grid{max-width:1280px}
+}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a class="logo" data-page="home"><div class="logo-icon">⛏</div> Modio</a>
+<div class="search-wrap"><svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="search" class="search-input" placeholder="Mod ara..." id="headerSearch" autocomplete="off"></div>
+<nav class="nav-links">
+<a class="nav-link active" data-page="home">Keşfet</a>
+<a class="nav-link" data-page="categories">Klasörler</a>
+<a class="nav-link" data-page="favorites">Favoriler</a>
+<a class="nav-link pc-only-nav" data-page="search">Ara</a>
+<a class="nav-link pc-only-nav" data-page="guide">Rehber</a>
+</nav>
+<button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></button>
+</div></header>
+
+<div class="page active" id="page-home">
+<section class="hero animate-in"><h1>Minecraft Modları</h1><p>Temiz, hızlı ve sade. En iyi modları tek yerden keşfet.</p></section>
+<section class="section animate-in delay-1"><div class="section-header"><h2 class="section-title">Öne Çıkanlar</h2><a class="see-all" data-page="categories">Klasörlere Git</a></div><div class="featured-scroll" id="featured"></div></section>
+<section class="section animate-in delay-2"><div class="section-header"><h2 class="section-title">Popüler Modlar</h2><span class="see-all" id="modCount">15 mod</span></div><div class="mod-grid" id="modGrid"></div></section>
+<footer class="site-footer">
+<div class="footer-links">
+<div class="footer-col">
+<a class="footer-link" data-info="legal">Yasal Uyarı</a>
+<a class="footer-link" data-info="cookies">Çerez Politikası</a>
+<a class="footer-link" data-info="contact">İletişim</a>
+</div>
+<div class="footer-col">
+<a class="footer-link" data-info="privacy">Gizlilik Politikası</a>
+<a class="footer-link" data-info="removal">Kaldırma Talebi</a>
+</div>
+</div>
+<div class="footer-social">
+<a class="social-link" href="https://youtube.com" target="_blank" rel="noopener"><span class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 6.7s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C16.2 3.2 12 3.2 12 3.2h0s-4.2 0-7.7.2c-.5 0-1.5.1-2.4 1-.7.7-.9 2.3-.9 2.3S.8 8.6.8 10.4v1.3c0 1.9.2 3.7.2 3.7s.2 1.6.9 2.3c.9.9 2.1.9 2.6 1 1.9.2 7.5.2 7.5.2s4.2 0 7.7-.2c.5 0 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.7v-1.3c0-1.9-.2-3.7-.2-3.7zM9.7 14.3V7.9l6.1 3.2z"/></svg></span>YouTube</a>
+<a class="social-link" href="https://instagram.com" target="_blank" rel="noopener"><span class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>Instagram</a>
+<a class="social-link" href="https://wa.me/" target="_blank" rel="noopener"><span class="social-icon wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.7-1.2A9 9 0 1012 3z"/><path d="M8.4 8.6c.1-.4.6-.4.9-.4.2 0 .4 0 .5.4.2.4.5 1.3.5 1.4.1.1.1.3 0 .4-.1.2-.2.3-.3.4-.1.2-.3.3-.1.6.2.4.8 1.2 1.7 1.9 1.1.9 1.9 1.1 2.2 1.2.2.1.4.1.5-.1.2-.2.6-.7.8-1 .2-.2.4-.2.6-.1l1.4.7c.2.1.4.2.4.3.1.2.1.9-.2 1.4-.3.5-1.4 1.1-2 1.1-.5 0-1.8-.2-3.5-1.4-2-1.3-3.2-3.4-3.4-3.7-.1-.3-.7-1.1-.7-2.1 0-1 .5-1.5.7-1.7z" fill="currentColor" stroke="none"/></svg></span>WhatsApp</a>
+</div>
+<p class="footer-note">Modio · Minecraft Modları · Temiz ve sade arayüz · Bu bir demo sitedir.</p>
+</footer>
+
+<div class="modal-overlay" id="infoModal"><div class="modal" id="infoModalSheet">
+<div class="modal-handle"></div>
+<h2 id="infoModalTitle" style="font-size:1.25rem;font-weight:650;letter-spacing:-.02em;margin-bottom:16px"></h2>
+<p class="info-modal-body" id="infoModalBody"></p>
+<button class="btn-secondary" id="infoModalClose" style="margin-top:26px">Kapat</button>
+</div></div>
+</div>
+
+<div class="page" id="page-categories">
+<div id="catFoldersView"><div class="page-title animate-in"><h1>Klasörler</h1><p>Platform seç, modlar sıralı gelsin</p></div><div class="cat-grid animate-in delay-1" id="catGrid"></div></div>
+<div id="catDetailView" style="display:none"><div class="page-title" style="padding-bottom:0">
+<button class="back-btn" id="backToFolders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg> Geri</button>
+<h1 id="catDetailTitle">Kategori</h1><p id="catDetailCount"></p></div><div class="numbered-list" id="numberedList"></div></div>
+</div>
+
+<div class="page" id="page-search">
+<div class="page-title animate-in"><h1>Ara</h1><p>Tüm modlar arasında hızlı arama</p></div>
+<div class="search-page-input animate-in delay-1"><svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="search" placeholder="Mod, geliştirici veya anahtar kelime..." id="fullSearch"></div>
+<div class="filter-row" id="searchFilters">
+<span class="filter-label">Platform</span>
+<button class="filter-chip active" data-filter="platform" data-value="all">Tümü</button>
+<button class="filter-chip" data-filter="platform" data-value="javaclient">Java Clientler</button>
+<button class="filter-chip" data-filter="platform" data-value="bedrock">Bedrock</button>
+<button class="filter-chip" data-filter="platform" data-value="bedrocktexture">Texturepack</button>
+<span class="filter-label" style="margin-left:12px">Sırala</span>
+<button class="filter-chip active" data-filter="sort" data-value="popular">Popüler</button>
+<button class="filter-chip" data-filter="sort" data-value="rating">Puan</button>
+<button class="filter-chip" data-filter="sort" data-value="name">İsim</button>
+</div>
+<div class="section"><div class="mod-grid" id="searchGrid"></div><div class="empty-state" id="searchEmpty" style="display:none"><div class="icon">🔍</div><p>Aramanızla eşleşen mod bulunamadı.</p></div></div>
+</div>
+
+<div class="page" id="page-favorites">
+<div class="page-title animate-in"><h1>Favoriler</h1><p>Beğendiğin modlar burada</p></div>
+<div class="section"><div class="mod-grid" id="favGrid"></div><div class="empty-state" id="favEmpty"><div class="icon">♡</div><p>Henüz favori eklemedin.<br>Mod kartlarındaki kalbe basarak ekleyebilirsin.</p></div></div>
+</div>
+
+<div class="page" id="page-guide">
+<div class="page-title animate-in"><h1>Rehber</h1><p>Mod yükleme ve kullanım ipuçları</p></div>
+<div class="guide-list animate-in delay-1">
+<div class="guide-item"><h3><span>1</span> Fabric / Forge nedir?</h3><p>Modları çalıştırmak için gerekli yükleyicilerdir. Çoğu modern mod Fabric kullanır.</p></div>
+<div class="guide-item"><h3><span>2</span> Mod nasıl yüklenir?</h3><p>İndirdiğin .jar dosyasını Minecraft’ın “mods” klasörüne atman yeterli.</p></div>
+<div class="guide-item"><h3><span>3</span> Performans için önerilenler</h3><p>Sodium + Lithium + Iris kombinasyonu genellikle en iyi FPS artışını sağlar.</p></div>
+<div class="guide-item"><h3><span>4</span> Shader kullanmak</h3><p>Iris Shaders ile shader paketlerini yükleyebilirsin.</p></div>
+<div class="guide-item"><h3><span>5</span> Uyumluluk kontrolü</h3><p>Modların Minecraft sürümüne ve birbirine uyumlu olduğundan emin ol.</p></div>
+<div class="guide-item"><h3><span>6</span> Yedek al</h3><p>Büyük değişikliklerden önce dünya klasörünü yedekle.</p></div>
+</div>
+</div>
+
+<div class="bottom-nav-wrap"><nav class="bottom-nav">
+<div class="nav-indicator" id="navIndicator"></div>
+<button class="bottom-item active" data-page="home" data-index="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 10v9a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1v-9"/></svg>Ana Sayfa</button>
+<button class="bottom-item" data-page="categories" data-index="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.8"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.8"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.8"/></svg>Klasörler</button>
+<button class="bottom-item" data-page="search" data-index="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Ara</button>
+<button class="bottom-item" data-page="favorites" data-index="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Favoriler</button>
+<button class="bottom-item" data-page="guide" data-index="4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><path d="M8 7h8M8 11h6"/></svg>Rehber</button>
+</nav></div>
+
+<div class="modal-overlay" id="modal"><div class="modal" id="modalSheet">
+<div class="modal-handle"></div>
+<div class="modal-header"><div class="modal-icon" id="modalIcon"></div><div class="modal-info"><h2 id="modalTitle"></h2><p id="modalAuthor"></p></div></div>
+<div class="modal-stats"><div class="stat"><div class="stat-value" id="modalDownloads"></div><div class="stat-label">İndirme</div></div><div class="stat"><div class="stat-value" id="modalRating"></div><div class="stat-label">Puan</div></div><div class="stat"><div class="stat-value" id="modalVersion"></div><div class="stat-label">Sürüm</div></div><div class="stat"><div class="stat-value" id="modalPlatform"></div><div class="stat-label">Platform</div></div></div>
+<p class="modal-desc" id="modalDesc"></p>
+<button class="btn-primary" id="downloadBtn">İndir</button>
+<button class="btn-secondary" id="modalFavBtn">Favorilere Ekle</button>
+</div></div>
+
+<script>
+const GITHUB_OWNER="shidouzzzw",GITHUB_REPO="Modio-mods",GITHUB_BRANCH="main",MODS_JSON_PATH="data/mods.json";
+const MODS_JSON_URL=`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${MODS_JSON_PATH}?t=${Date.now()}`;
+let mods=[];
+async function loadMods(){
+  try{
+    const res=await fetch(MODS_JSON_URL);
+    if(!res.ok)throw new Error('mods.json alınamadı');
+    mods=await res.json();
+  }catch(e){
+    console.error('Mod verisi yüklenemedi:',e);
+    mods=[];
+  }
+  renderFeatured();renderHomeMods();renderCategories();
+  if(currentPage==='search')renderSearch(document.getElementById('fullSearch').value);
+  if(currentPage==='favorites')renderFavorites();
+}
+const categories=[{id:"bedrock",name:"Bedrock Modları",color:"c-bedrock"},{id:"javaclient",name:"Java Clientler",color:"c-javaclient"},{id:"bedrocktexture",name:"Bedrock Texturepackler",color:"c-bedrocktexture"}];
+(function(){const saved=localStorage.getItem('modio_theme');if(saved)document.documentElement.setAttribute('data-theme',saved);})();
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  const next=isDark?'light':'dark';
+  if(next==='light')document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme','dark');
+  localStorage.setItem('modio_theme',next);
+});
+let favorites=JSON.parse(localStorage.getItem('modio_favs')||'[]'),currentPage='home';
+const modGrid=document.getElementById('modGrid'),featured=document.getElementById('featured'),modCount=document.getElementById('modCount'),modal=document.getElementById('modal'),modalSheet=document.getElementById('modalSheet'),favGrid=document.getElementById('favGrid'),favEmpty=document.getElementById('favEmpty'),searchGrid=document.getElementById('searchGrid'),searchEmpty=document.getElementById('searchEmpty'),navIndicator=document.getElementById('navIndicator');
+const colorMap={blue:'#007aff',orange:'#ff9500',purple:'#af52de',teal:'#30b0c7',rose:'#ff375f',green:'#34c759'};
+function avatarHTML(mod,size=56){const letter=(mod.name||'?').trim().charAt(0).toUpperCase();const bg=colorMap[mod.color]||'#8e8e93';const fs=Math.round(size*0.42);if(mod.icon)return `<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;overflow:hidden;"><img src="${mod.icon}" alt="${mod.name} icon" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';this.parentElement.textContent='${letter}'"></div>`;return `<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;">${letter}</div>`}
+function folderSVG(){return `<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>`}
+const folderColorMap={bedrock:'#0062cc',javaclient:'#1f8a3d',bedrocktexture:'#c26a00'};
+function heartSVG(active){return `<svg viewBox="0 0 24 24" width="17" height="17" fill="${active?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`}
+function isFav(id){return favorites.includes(id)}
+function toggleFav(id){if(isFav(id))favorites=favorites.filter(f=>f!==id);else favorites.push(id);localStorage.setItem('modio_favs',JSON.stringify(favorites));renderAll();updateModalFavBtn()}
+function createModCard(mod,i=0){const c=document.createElement('article');c.className='mod-card';c.style.animation=`scaleIn 0.28s ease ${i*0.025}s both`;c.innerHTML=`<div class="mod-thumb ${mod.color}">${avatarHTML(mod,56)}<button class="fav-btn ${isFav(mod.id)?'active':''}" data-id="${mod.id}">${heartSVG(isFav(mod.id))}</button></div><div class="mod-body"><div class="mod-title">${mod.name}</div><div class="mod-desc">${mod.desc}</div><div class="mod-meta"><span>↓ ${mod.downloads}</span><span>★ ${mod.rating}</span><span class="badge">${mod.version}</span></div></div>`;c.querySelector('.fav-btn').addEventListener('click',e=>{e.stopPropagation();toggleFav(mod.id)});c.addEventListener('click',()=>openModal(mod));return c}
+function renderHomeMods(){modGrid.innerHTML='';modCount.textContent=mods.length+' mod';mods.forEach((m,i)=>modGrid.appendChild(createModCard(m,i)))}
+function renderFeatured(){featured.innerHTML='';mods.slice(0,5).forEach(mod=>{const c=document.createElement('div');c.className='featured-card';c.innerHTML=`<div class="featured-thumb mod-thumb ${mod.color}">${avatarHTML(mod,64)}</div><div class="featured-body"><div class="featured-title">${mod.name}</div><div class="featured-desc">${mod.desc}</div></div>`;c.addEventListener('click',()=>openModal(mod));featured.appendChild(c)})}
+function renderCategories(){const g=document.getElementById('catGrid');g.innerHTML='';categories.forEach((cat,i)=>{const c=document.createElement('div');c.className=`cat-card ${cat.color}`;c.style.animation=`scaleIn 0.28s ease ${i*0.05}s both`;const cnt=mods.filter(m=>m.platform===cat.id).length;const iconColor=folderColorMap[cat.id]||'#8e8e93';c.innerHTML=`<div class="icon cat-folder-icon" style="color:${iconColor}">${folderSVG()}</div><h3>${cat.name}</h3><span>${cnt} mod</span>`;c.addEventListener('click',()=>openCategory(cat));g.appendChild(c)})}
+function openCategory(cat){const list=mods.filter(m=>m.platform===cat.id);document.getElementById('catFoldersView').style.display='none';document.getElementById('catDetailView').style.display='block';document.getElementById('catDetailTitle').textContent=cat.name;document.getElementById('catDetailCount').textContent=list.length+' mod listeleniyor';const cont=document.getElementById('numberedList');cont.innerHTML='';if(!list.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><p>Bu klasörde henüz mod yok.</p></div>';return}list.forEach((mod,i)=>{const item=document.createElement('div');item.className='numbered-item';item.style.animation=`scaleIn 0.25s ease ${i*0.03}s both`;item.innerHTML=`<div class="num">${i+1}</div><div class="mod-icon mod-thumb ${mod.color}">${avatarHTML(mod,40)}</div><div class="numbered-info"><h4>${mod.name}</h4><p>${mod.desc}</p></div><div class="numbered-meta">★ ${mod.rating}</div>`;item.addEventListener('click',()=>openModal(mod));cont.appendChild(item)});window.scrollTo({top:0,behavior:'smooth'})}
+document.getElementById('backToFolders').addEventListener('click',()=>{document.getElementById('catDetailView').style.display='none';document.getElementById('catFoldersView').style.display='block'});
+function renderFavorites(){favGrid.innerHTML='';const favs=mods.filter(m=>isFav(m.id));favEmpty.style.display=favs.length?'none':'block';favs.forEach((m,i)=>favGrid.appendChild(createModCard(m,i)))}
+let searchPlatform='all',searchSort='popular';
+function renderSearch(q=''){
+  q=(q||document.getElementById('fullSearch').value||'').toLowerCase().trim();
+  let f=mods.filter(m=>{
+    const matchQ=!q||m.name.toLowerCase().includes(q)||m.desc.toLowerCase().includes(q)||m.author.toLowerCase().includes(q);
+    const matchP=searchPlatform==='all'||m.platform===searchPlatform;
+    return matchQ&&matchP;
+  });
+  if(searchSort==='rating')f=[...f].sort((a,b)=>parseFloat(b.rating)-parseFloat(a.rating));
+  else if(searchSort==='name')f=[...f].sort((a,b)=>a.name.localeCompare(b.name,'tr'));
+  else f=[...f].sort((a,b)=>parseFloat(String(b.downloads).replace(/[^0-9.]/g,''))-(parseFloat(String(a.downloads).replace(/[^0-9.]/g,''))||0));
+  searchGrid.innerHTML='';
+  const showEmpty=f.length===0&&(q||searchPlatform!=='all');
+  searchEmpty.style.display=showEmpty?'block':'none';
+  f.forEach((m,i)=>searchGrid.appendChild(createModCard(m,i)));
+}
+document.querySelectorAll('#searchFilters .filter-chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    const type=chip.dataset.filter;
+    document.querySelectorAll('#searchFilters .filter-chip[data-filter="'+type+'"]').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    if(type==='platform')searchPlatform=chip.dataset.value;
+    if(type==='sort')searchSort=chip.dataset.value;
+    renderSearch();
+  });
+});
+function renderAll(){renderHomeMods();renderFeatured();renderFavorites();if(currentPage==='search')renderSearch(document.getElementById('fullSearch').value)}
+function openModal(mod){document.getElementById('modalIcon').className='modal-icon';document.getElementById('modalIcon').innerHTML=avatarHTML(mod,60);document.getElementById('modalTitle').textContent=mod.name;document.getElementById('modalAuthor').textContent='Geliştirici: '+mod.author;document.getElementById('modalDownloads').textContent=mod.downloads;document.getElementById('modalRating').textContent=mod.rating;document.getElementById('modalVersion').textContent=mod.version;const platformLabels={javaclient:'Java Client',bedrock:'Bedrock',bedrocktexture:'Texturepack'};document.getElementById('modalPlatform').textContent=platformLabels[mod.platform]||mod.platform;document.getElementById('modalDesc').textContent=mod.desc;document.getElementById('modalFavBtn').dataset.id=mod.id;currentModUrl=mod.url||null;updateModalFavBtn();modal.classList.add('open');document.body.style.overflow='hidden';modalSheet.style.transform=''}
+function updateModalFavBtn(){const b=document.getElementById('modalFavBtn');b.textContent=isFav(+b.dataset.id)?'Favorilerden Çıkar':'Favorilere Ekle'}
+function closeModal(){modal.classList.remove('open');document.body.style.overflow='';modalSheet.style.transform='';modalSheet.classList.remove('dragging')}
+let startY=0,currentY=0,isDragging=false;
+function onDragStart(e){const y=e.touches?e.touches[0].clientY:e.clientY;startY=y;currentY=y;isDragging=true;modalSheet.classList.add('dragging')}
+function onDragMove(e){if(!isDragging)return;const y=e.touches?e.touches[0].clientY:e.clientY;currentY=y;const d=currentY-startY;if(d>0){modalSheet.style.transform=`translateY(${d}px)`;const p=Math.min(d/300,1);modal.style.background=`rgba(0,0,0,${0.35*(1-p*0.7)})`}}
+function onDragEnd(){if(!isDragging)return;isDragging=false;modalSheet.classList.remove('dragging');const d=currentY-startY;if(d>120){modalSheet.style.transition='transform 0.28s cubic-bezier(0.32,0.72,0,1)';modalSheet.style.transform='translateY(110%)';modal.style.transition='opacity 0.28s ease';modal.style.opacity='0';setTimeout(()=>{closeModal();modal.style.opacity='';modal.style.background='';modalSheet.style.transition=''},280)}else{modalSheet.style.transition='transform 0.3s cubic-bezier(0.32,0.72,0,1)';modalSheet.style.transform='translateY(0)';modal.style.background='';setTimeout(()=>{modalSheet.style.transition=''},300)}}
+modalSheet.addEventListener('touchstart',onDragStart,{passive:true});modalSheet.addEventListener('touchmove',onDragMove,{passive:true});modalSheet.addEventListener('touchend',onDragEnd);modalSheet.addEventListener('mousedown',onDragStart);window.addEventListener('mousemove',onDragMove);window.addEventListener('mouseup',onDragEnd);
+function updateIndicator(i){navIndicator.style.transform=`translateX(${i*100}%)`}
+function switchPage(page){if(page===currentPage)return;currentPage=page;document.querySelectorAll('.bottom-item').forEach(item=>{const a=item.dataset.page===page;item.classList.toggle('active',a);if(a)updateIndicator(+item.dataset.index)});document.querySelectorAll('.nav-link').forEach(l=>l.classList.toggle('active',l.dataset.page===page));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const t=document.getElementById('page-'+page);if(t)t.classList.add('active');if(page==='categories'){document.getElementById('catDetailView').style.display='none';document.getElementById('catFoldersView').style.display='block';renderCategories()}if(page==='favorites')renderFavorites();if(page==='search'){renderSearch();setTimeout(()=>document.getElementById('fullSearch')?.focus(),60);}window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.bottom-item').forEach(i=>i.addEventListener('click',()=>switchPage(i.dataset.page)));
+document.querySelectorAll('[data-page]').forEach(el=>{if(el.classList.contains('bottom-item'))return;el.addEventListener('click',e=>{e.preventDefault();switchPage(el.dataset.page)})});
+document.getElementById('headerSearch').addEventListener('input',e=>{if(e.target.value.trim()){switchPage('search');document.getElementById('fullSearch').value=e.target.value;renderSearch(e.target.value)}});
+document.getElementById('fullSearch').addEventListener('input',e=>renderSearch(e.target.value));
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+let currentModUrl=null;
+document.getElementById('downloadBtn').addEventListener('click',()=>{
+  const b=document.getElementById('downloadBtn');
+  if(currentModUrl){
+    b.textContent='İndiriliyor...';
+    const a=document.createElement('a');
+    a.href=currentModUrl;
+    a.download='';
+    a.target='_blank';
+    a.rel='noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>{b.textContent='İndir';closeModal()},700);
+  } else {
+    b.textContent='İndirme bağlantısı yok';
+    setTimeout(()=>{b.textContent='İndir'},1200);
+  }
+});
+document.getElementById('modalFavBtn').addEventListener('click',()=>toggleFav(+document.getElementById('modalFavBtn').dataset.id));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+const footerInfo={
+  legal:{title:'Yasal Uyarı',body:'Modio bir demo/vitrin sitesidir. Burada listelenen modlar, istemciler ve doku paketleri kendi geliştiricilerine aittir; Modio bu içeriklerin sahibi, resmi dağıtıcısı veya temsilcisi değildir. İndirme bağlantıları ilgili projelerin kendi resmi sayfalarına yönlendirir. Kullanım, ilgili modun kendi lisans şartlarına tabidir.'},
+  privacy:{title:'Gizlilik Politikası',body:'Modio, hesap oluşturmanızı gerektirmez ve kişisel verilerinizi sunucularında toplamaz. Favori listesi ve tema tercihi gibi ayarlar yalnızca kendi cihazınızdaki tarayıcı deposunda (localStorage) tutulur ve tarayıcı verilerinizi temizlediğinizde silinir.'},
+  cookies:{title:'Çerez Politikası',body:'Bu site takip amaçlı çerez kullanmaz. Sadece tema tercihiniz ve favori modlarınız gibi bilgiler, tarayıcınızın yerel deposunda (localStorage) cihazınızda saklanır; üçüncü taraflarla paylaşılmaz.'},
+  removal:{title:'Kaldırma Talebi',body:'Listelenen bir içeriğin kaldırılmasını talep etmek, hatalı bilgi bildirmek veya telif hakkı ile ilgili bir sorunu iletmek isterseniz İletişim bölümündeki kanaldan bize ulaşabilirsiniz. Talepler incelenip makul sürede yanıtlanır.'},
+  contact:{title:'İletişim',body:'Sorularınız, önerileriniz veya iş birliği talepleriniz için bize sosyal medya hesaplarımızdan veya WhatsApp üzerinden ulaşabilirsiniz. Geri bildirimleriniz Modio\u2019yu geliştirmemize yardımcı olur.'}
+};
+const infoModal=document.getElementById('infoModal'),infoModalSheet=document.getElementById('infoModalSheet');
+function openInfoModal(key){
+  const info=footerInfo[key];if(!info)return;
+  document.getElementById('infoModalTitle').textContent=info.title;
+  document.getElementById('infoModalBody').textContent=info.body;
+  infoModal.classList.add('open');document.body.style.overflow='hidden';infoModalSheet.style.transform='';
+}
+function closeInfoModal(){infoModal.classList.remove('open');document.body.style.overflow=''}
+document.querySelectorAll('.footer-link').forEach(link=>link.addEventListener('click',()=>openInfoModal(link.dataset.info)));
+document.getElementById('infoModalClose').addEventListener('click',closeInfoModal);
+infoModal.addEventListener('click',e=>{if(e.target===infoModal)closeInfoModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeInfoModal()});
+
+updateIndicator(0);loadMods();
+</script>
+</body>
+</html>

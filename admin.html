@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modio — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f5f7;--surface:#ffffff;--text:#1d1d1f;--text-secondary:#6e6e73;--border:#e5e5ea;--accent:#007aff;--danger:#ff3b30;--radius:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,-apple-system,sans-serif;background:var(--bg);color:var(--text);padding:20px;line-height:1.5}
+.wrap{max-width:640px;margin:0 auto}
+h1{font-size:1.5rem;margin-bottom:4px}
+.sub{color:var(--text-secondary);font-size:14px;margin-bottom:24px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.card h2{font-size:15px;margin-bottom:14px}
+label{display:block;font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;margin-top:14px}
+label:first-of-type{margin-top:0}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--text);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:70px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{display:block;width:100%;padding:13px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-top:18px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-danger{background:var(--danger)}
+.btn-small{width:auto;padding:7px 12px;font-size:12px;margin-top:0}
+.log{margin-top:14px;font-size:13px;padding:10px 12px;border-radius:10px;background:#f5f5f7;color:var(--text-secondary);white-space:pre-wrap;display:none}
+.log.show{display:block}
+.log.err{background:#fff0ef;color:#c62f27}
+.log.ok{background:#eefaf0;color:#1f8a3d}
+.mod-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.mod-row:last-child{border-bottom:none}
+.mod-row .info{flex:1;min-width:0}
+.mod-row .info b{display:block;font-size:14px}
+.mod-row .info span{font-size:12px;color:var(--text-secondary)}
+.hint{font-size:12px;color:var(--text-secondary);margin-top:6px}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Modio Admin</h1>
+  <div class="sub">Buradan eklediğin her mod, GitHub reponu güncelleyip anında siteye düşer.</div>
+
+  <div class="card">
+    <h2>1. GitHub Bağlantısı</h2>
+    <label>Kullanıcı adı / Organizasyon</label>
+    <input id="ghOwner" placeholder="shidouzzzw">
+    <label>Repo adı</label>
+    <input id="ghRepo" placeholder="Modio-mods">
+    <label>Branch</label>
+    <input id="ghBranch" placeholder="main">
+    <label>Personal Access Token</label>
+    <input id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx">
+    <div class="hint">Token sadece bu tarayıcıda (localStorage) saklanır, hiçbir yere gönderilmez. GitHub → Settings → Developer settings → Personal access tokens → Generate new token (classic), "repo" yetkisini işaretle.</div>
+  </div>
+
+  <div class="card">
+    <h2>2. Yeni Mod Ekle</h2>
+    <label>Mod Adı</label>
+    <input id="fName" placeholder="Örn. Better on Bedrock">
+    <label>Açıklama</label>
+    <textarea id="fDesc" placeholder="Kısa açıklama"></textarea>
+    <div class="row2">
+      <div><label>Platform</label>
+        <select id="fPlatform">
+          <option value="bedrock">Bedrock Modu</option>
+          <option value="javaclient">Java Client</option>
+          <option value="bedrocktexture">Bedrock Texturepack</option>
+        </select>
+      </div>
+      <div><label>Renk (avatar)</label>
+        <select id="fColor">
+          <option value="blue">Mavi</option>
+          <option value="orange">Turuncu</option>
+          <option value="purple">Mor</option>
+          <option value="teal">Turkuaz</option>
+          <option value="rose">Pembe</option>
+          <option value="green">Yeşil</option>
+        </select>
+      </div>
+    </div>
+    <div class="row2">
+      <div><label>Versiyon</label><input id="fVersion" placeholder="1.21"></div>
+      <div><label>Geliştirici</label><input id="fAuthor" placeholder="Yapımcı adı"></div>
+    </div>
+    <div class="row2">
+      <div><label>İndirme sayısı (gösterim)</label><input id="fDownloads" placeholder="1.2M"></div>
+      <div><label>Puan (gösterim)</label><input id="fRating" placeholder="4.5"></div>
+    </div>
+    <label>Mod Dosyası (.mcpack / .jar / .zip)</label>
+    <input id="fFile" type="file">
+    <label>İkon (isteğe bağlı, .png/.jpg)</label>
+    <input id="fIcon" type="file" accept="image/*">
+    <label>Harici indirme linki (isteğe bağlı — doldurursan dosya yerine bu link kullanılır)</label>
+    <input id="fExternalUrl" placeholder="https://...">
+
+    <button class="btn" id="submitBtn">Modu Ekle</button>
+    <div class="log" id="log"></div>
+  </div>
+
+  <div class="card">
+    <h2>Mevcut Modlar</h2>
+    <div id="modList" class="hint">Yükleniyor...</div>
+  </div>
+
+  <div class="hint" style="text-align:center;margin-top:10px"><a href="index.html">← Siteye dön</a></div>
+</div>
+
+<script>
+const fields=['ghOwner','ghRepo','ghBranch','ghToken'];
+fields.forEach(id=>{
+  const el=document.getElementById(id);
+  el.value=localStorage.getItem('modio_'+id)||(id==='ghBranch'?'main':'');
+  el.addEventListener('input',()=>localStorage.setItem('modio_'+id,el.value.trim()));
+});
+
+function cfg(){
+  return {
+    owner:document.getElementById('ghOwner').value.trim(),
+    repo:document.getElementById('ghRepo').value.trim(),
+    branch:document.getElementById('ghBranch').value.trim()||'main',
+    token:document.getElementById('ghToken').value.trim()
+  };
+}
+
+function log(msg,type){
+  const el=document.getElementById('log');
+  el.textContent=msg;
+  el.className='log show'+(type?' '+type:'');
+}
+
+async function ghGet(path){
+  const c=cfg();
+  const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}?ref=${c.branch}`,{
+    headers:{Authorization:'token '+c.token,Accept:'application/vnd.github+json'}
+  });
+  if(res.status===404)return null;
+  if(!res.ok)throw new Error('GitHub okuma hatası: '+res.status+' '+(await res.text()));
+  return res.json();
+}
+
+async function ghPut(path,base64Content,sha,message){
+  const c=cfg();
+  const body={message:message||('Modio: '+path+' güncellendi'),content:base64Content,branch:c.branch};
+  if(sha)body.sha=sha;
+  const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}`,{
+    method:'PUT',
+    headers:{Authorization:'token '+c.token,Accept:'application/vnd.github+json','Content-Type':'application/json'},
+    body:JSON.stringify(body)
+  });
+  if(!res.ok)throw new Error('GitHub yazma hatası: '+res.status+' '+(await res.text()));
+  return res.json();
+}
+
+async function ghDelete(path,sha,message){
+  const c=cfg();
+  const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}`,{
+    method:'DELETE',
+    headers:{Authorization:'token '+c.token,Accept:'application/vnd.github+json','Content-Type':'application/json'},
+    body:JSON.stringify({message:message||('Modio: '+path+' silindi'),sha,branch:c.branch})
+  });
+  if(!res.ok)throw new Error('GitHub silme hatası: '+res.status+' '+(await res.text()));
+}
+
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>resolve(r.result.split(',')[1]);
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+
+function textToBase64(str){
+  return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,(m,p)=>String.fromCharCode('0x'+p)));
+}
+function base64ToText(b64){
+  return decodeURIComponent(atob(b64.replace(/\n/g,'')).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+}
+
+function slugify(name){
+  return name.toLowerCase()
+    .replace(/ı/g,'i').replace(/ş/g,'s').replace(/ğ/g,'g').replace(/ü/g,'u').replace(/ö/g,'o').replace(/ç/g,'c')
+    .replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+}
+
+async function loadModsJson(){
+  const file=await ghGet('data/mods.json');
+  if(!file)return {mods:[],sha:null};
+  return {mods:JSON.parse(base64ToText(file.content)),sha:file.sha};
+}
+
+async function renderModList(){
+  const listEl=document.getElementById('modList');
+  try{
+    const {mods}=await loadModsJson();
+    if(!mods.length){listEl.textContent='Henüz mod eklenmemiş.';return;}
+    listEl.innerHTML='';
+    listEl.className='';
+    mods.forEach(m=>{
+      const row=document.createElement('div');
+      row.className='mod-row';
+      row.innerHTML=`<div class="info"><b>${m.name}</b><span>${m.platform} · v${m.version}</span></div><button class="btn btn-danger btn-small" data-id="${m.id}">Sil</button>`;
+      row.querySelector('button').addEventListener('click',()=>deleteMod(m.id));
+      listEl.appendChild(row);
+    });
+  }catch(e){
+    listEl.textContent='Liste alınamadı: '+e.message;
+  }
+}
+
+async function deleteMod(id){
+  if(!confirm('Bu modu silmek istediğine emin misin?'))return;
+  try{
+    log('Siliniyor...');
+    const {mods,sha}=await loadModsJson();
+    const target=mods.find(m=>m.id===id);
+    const remaining=mods.filter(m=>m.id!==id);
+    await ghPut('data/mods.json',textToBase64(JSON.stringify(remaining,null,2)),sha,'Modio: mod silindi ('+(target?target.name:id)+')');
+    log('Mod silindi. (Dosya/ikonları GitHub reponda elle silmek istersen mods/ ve icons/ klasörlerine bakabilirsin.)','ok');
+    renderModList();
+  }catch(e){
+    log('Hata: '+e.message,'err');
+  }
+}
+
+document.getElementById('submitBtn').addEventListener('click',async()=>{
+  const c=cfg();
+  if(!c.owner||!c.repo||!c.token){log('Önce GitHub bilgilerini ve token bilgisini gir.','err');return;}
+
+  const name=document.getElementById('fName').value.trim();
+  const desc=document.getElementById('fDesc').value.trim();
+  const platform=document.getElementById('fPlatform').value;
+  const color=document.getElementById('fColor').value;
+  const version=document.getElementById('fVersion').value.trim()||'-';
+  const author=document.getElementById('fAuthor').value.trim()||'Bilinmiyor';
+  const downloads=document.getElementById('fDownloads').value.trim()||'0';
+  const rating=document.getElementById('fRating').value.trim()||'-';
+  const externalUrl=document.getElementById('fExternalUrl').value.trim();
+  const fileInput=document.getElementById('fFile').files[0];
+  const iconInput=document.getElementById('fIcon').files[0];
+
+  if(!name){log('Mod adı zorunlu.','err');return;}
+  if(!fileInput && !externalUrl){log('Ya bir dosya seç ya da harici link gir.','err');return;}
+
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+
+  try{
+    const slug=slugify(name);
+    let modUrl=externalUrl||null;
+    let iconUrl=null;
+
+    if(fileInput){
+      log('Mod dosyası yükleniyor...');
+      const ext=fileInput.name.split('.').pop();
+      const path=`mods/${slug}.${ext}`;
+      const existing=await ghGet(path);
+      const base64=await fileToBase64(fileInput);
+      await ghPut(path,base64,existing?existing.sha:null,'Modio: '+name+' dosyası eklendi');
+      modUrl=`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${path}`;
+    }
+
+    if(iconInput){
+      log('İkon yükleniyor...');
+      const ext=iconInput.name.split('.').pop();
+      const path=`icons/${slug}.${ext}`;
+      const existing=await ghGet(path);
+      const base64=await fileToBase64(iconInput);
+      await ghPut(path,base64,existing?existing.sha:null,'Modio: '+name+' ikonu eklendi');
+      iconUrl=`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${path}`;
+    }
+
+    log('Mod listesi güncelleniyor...');
+    const {mods,sha}=await loadModsJson();
+    const newId=mods.length?Math.max(...mods.map(m=>m.id))+1:1;
+    const newMod={id:newId,name,desc,platform,color,downloads,rating,version,author};
+    if(modUrl)newMod.url=modUrl;
+    if(iconUrl)newMod.icon=iconUrl;
+    mods.push(newMod);
+    await ghPut('data/mods.json',textToBase64(JSON.stringify(mods,null,2)),sha,'Modio: yeni mod eklendi ('+name+')');
+
+    log('"'+name+'" başarıyla eklendi! Siteyi yenileyince görünecek.','ok');
+    ['fName','fDesc','fVersion','fAuthor','fDownloads','fRating','fExternalUrl'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('fFile').value='';
+    document.getElementById('fIcon').value='';
+    renderModList();
+  }catch(e){
+    log('Hata: '+e.message,'err');
+  }finally{
+    btn.disabled=false;
+  }
+});
+
+renderModList();
+</script>
+</body>
+</html>
