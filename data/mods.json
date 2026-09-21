@@ -92,17 +92,5 @@
     "rating": "4.4",
     "version": "1.21",
     "author": "BV Studio"
-  },
-  {
-    "id": 22,
-    "name": "Better on Bedrock",
-    "desc": "Deneme",
-    "platform": "bedrock",
-    "color": "blue",
-    "downloads": "129",
-    "rating": "4.1",
-    "version": "-",
-    "author": "Erkan",
-    "url": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/mods/better-on-bedrock.html"
   }
 ]
