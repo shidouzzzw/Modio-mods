@@ -296,7 +296,7 @@ const MODS_JSON_URL=`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_
 let mods=[];
 async function loadMods(){
   try{
-    const res=await fetch(MODS_JSON_URL);
+    const res=await fetch(MODS_JSON_URL,{cache:'no-store'});
     if(!res.ok)throw new Error('mods.json alınamadı');
     mods=await res.json();
   }catch(e){

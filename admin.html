@@ -132,7 +132,8 @@ function log(msg,type){
 
 async function ghGet(path){
   const c=cfg();
-  const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}?ref=${c.branch}`,{
+  const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}?ref=${c.branch}&_=${Date.now()}`,{
+    cache:'no-store',
     headers:{Authorization:'token '+c.token,Accept:'application/vnd.github+json'}
   });
   if(res.status===404)return null;
