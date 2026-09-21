@@ -94,5 +94,18 @@
     "author": "SystemTv",
     "url": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/mods/system-dynamic-light.mcaddon",
     "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/system-dynamic-light.png"
+  },
+  {
+    "id": 23,
+    "name": "Verity - Bedrock Edition",
+    "desc": "Küçük, yardımsever bir dost ama ona doğudaki köy hakkında soru sormayın ve onu yalnız bırakmayın...",
+    "platform": "bedrock",
+    "color": "blue",
+    "downloads": "13.2M+",
+    "rating": "4.8",
+    "version": "1.26.50",
+    "author": "PnTMC",
+    "url": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/mods/verity-bedrock-edition.mcaddon",
+    "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/verity-bedrock-edition.png"
   }
 ]
