@@ -81,5 +81,18 @@
     "rating": "4.4",
     "version": "1.21",
     "author": "BV Studio"
+  },
+  {
+    "id": 22,
+    "name": "System Dynamic Light",
+    "desc": "System Dynamic Light: Elindeki veya yakındaki ışık yayan eşyalar (meşale, fener vb.) hareket ederken gerçek zamanlı çevreyi aydınlatır. Böylece ışık koymadan etrafı görebilirsin.",
+    "platform": "bedrock",
+    "color": "green",
+    "downloads": "6.1",
+    "rating": "4.8",
+    "version": "1.21.132",
+    "author": "SystemTv",
+    "url": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/mods/system-dynamic-light.mcaddon",
+    "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/system-dynamic-light.png"
   }
 ]
