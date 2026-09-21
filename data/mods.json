@@ -13,18 +13,6 @@
     "icon": "https://github.com/shidouzzzw/Modio-mods/raw/refs/heads/main/icons/action-and-stuff.png"
   },
   {
-    "id": 17,
-    "name": "Badlion Client",
-    "desc": "FPS artışı, mod desteği ve PvP pratik sunucularıyla bilinen bir Java istemcisi.",
-    "platform": "javaclient",
-    "color": "green",
-    "downloads": "6M+",
-    "rating": "4.6",
-    "version": "1.20.4",
-    "author": "Badlion",
-    "url": "https://www.badlion.net/"
-  },
-  {
     "id": 20,
     "name": "Dokucraft Bedrock",
     "desc": "Ortaçağ esintili, detaylı ve atmosferik bir doku paketi. Klasik bir Java paketinin Bedrock'a taşınmış hali.",
