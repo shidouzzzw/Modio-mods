@@ -37,18 +37,6 @@
     "url": "https://www.badlion.net/"
   },
   {
-    "id": 18,
-    "name": "LabyMod",
-    "desc": "Kozmetik öğeler, sohbet geliştirmeleri ve performans ayarları sunan popüler bir Java istemcisi.",
-    "platform": "javaclient",
-    "color": "purple",
-    "downloads": "5M+",
-    "rating": "4.5",
-    "version": "1.20.1",
-    "author": "LabyMedia",
-    "url": "https://laby.net/"
-  },
-  {
     "id": 19,
     "name": "Faithful 32x",
     "desc": "Orijinal Minecraft dokularını daha net ve keskin hale getiren, vanilla hissini koruyan popüler bir doku paketi.",
