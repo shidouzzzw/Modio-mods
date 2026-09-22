@@ -1,17 +1,5 @@
 [
   {
-    "id": 16,
-    "name": "Lunar Client",
-    "desc": "Performans artışı, kozmetikler ve dahili pratik sunucularıyla gelen popüler bir Java istemcisi.",
-    "platform": "javaclient",
-    "color": "blue",
-    "downloads": "10M+",
-    "rating": "4.7",
-    "version": "1.21",
-    "author": "Moonsworth",
-    "url": "https://www.lunarclient.com/"
-  },
-  {
     "id": 17,
     "name": "Badlion Client",
     "desc": "FPS artışı, mod desteği ve PvP pratik sunucularıyla bilinen bir Java istemcisi.",
