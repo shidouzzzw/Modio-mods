@@ -12,5 +12,19 @@
     "url": "https://www.mediafire.com/file/bm688987qfwmccn/Better-on-Bedrock+(1).mcaddon/file",
     "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/better-on-bedrock.jpg",
     "iconSmall": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/better-on-bedrock-small.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Verity - Bedrock Edition",
+    "desc": "Verity, Minecraft Bedrock'a konuşabilen gizemli bir yardımcı karakter ekleyen korku/ARG temalı bir addondur. Sesli sohbet, TTS ve yapay zekâ benzeri özelliklerle oyuncuyla etkileşime girer ve hayatta kalma deneyimine ürkütücü olaylar katar.",
+    "platform": "bedrock",
+    "color": "blue",
+    "downloads": "13.2M",
+    "rating": "4.8",
+    "version": "1.21.120+",
+    "author": "PnTMC",
+    "url": "https://www.mediafire.com/file/txthgecpcibmh3u/ThatMob's+Verity+4.0.0+by+PnTMC+[Add-on]+-+V26.50.mcaddon/file",
+    "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/verity-bedrock-edition.png",
+    "iconSmall": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/verity-bedrock-edition-small.png"
   }
 ]
