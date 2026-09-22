@@ -102,5 +102,19 @@
     "version": "1.21",
     "author": "EssentialsX Team",
     "url": "https://essentialsx.net/"
+  },
+  {
+    "id": 23,
+    "name": "Bebebeb",
+    "desc": "Jddkdk",
+    "platform": "bedrock",
+    "color": "blue",
+    "downloads": "Kdkdk",
+    "rating": "Kdkdk",
+    "version": "-",
+    "author": "Kdkdk",
+    "url": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/mods/bebebeb.mcpack",
+    "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/bebebeb.jpg",
+    "iconSmall": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/bebebeb-small.jpg"
   }
 ]
