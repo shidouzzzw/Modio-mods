@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Better on Bedrock",
+    "desc": "Better on Bedrock, Minecraft Bedrock Edition'ı daha zengin ve sürükleyici hale getiren büyük bir addon paketidir. Yeni biyomlar, yapılar, yaratıklar, bosslar, silahlar, zırhlar, eşyalar ve yaşam kalitesi özellikleri ekleyerek oyunun vanilla hissini korurken içeriğini genişletir. Tek oyunculu ve çok oyunculu dünyalarda kullanılabilir.",
+    "platform": "bedrock",
+    "color": "blue",
+    "downloads": "6.3M",
+    "rating": "4.1",
+    "version": "1.21.120+",
+    "author": "FoxyStar Studios",
+    "url": "https://www.mediafire.com/file/bm688987qfwmccn/Better-on-Bedrock+(1).mcaddon/file",
+    "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/better-on-bedrock.jpg",
+    "iconSmall": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/better-on-bedrock-small.jpg"
+  }
+]
