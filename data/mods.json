@@ -56,17 +56,5 @@
     "version": "1.20.1",
     "author": "LabyMedia",
     "url": "https://laby.net/"
-  },
-  {
-    "id": 19,
-    "name": "Faithful 32x",
-    "desc": "Orijinal Minecraft dokularını daha net ve keskin hale getiren, vanilla hissini koruyan popüler bir doku paketi.",
-    "platform": "bedrocktexture",
-    "color": "blue",
-    "downloads": "8M+",
-    "rating": "4.8",
-    "version": "1.21",
-    "author": "Faithful Team",
-    "url": "https://faithfulpack.net/"
   }
 ]
