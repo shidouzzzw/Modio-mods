@@ -67,6 +67,7 @@ a{color:var(--accent)}
           <option value="bedrock">Bedrock Modu</option>
           <option value="javaclient">Java Client</option>
           <option value="bedrocktexture">Bedrock Texturepack</option>
+          <option value="javaplugin">Java Plugin</option>
         </select>
       </div>
       <div><label>Renk (avatar)</label>
@@ -90,8 +91,12 @@ a{color:var(--accent)}
     </div>
     <label>Mod Dosyası (.mcpack / .jar / .zip)</label>
     <input id="fFile" type="file">
-    <label>İkon (isteğe bağlı, .png/.jpg)</label>
+    <label>Büyük İkon (kart/öne çıkanlar için, geniş görsel — ör. 800x450)</label>
     <input id="fIcon" type="file" accept="image/*">
+    <div class="hint">Ana sayfa kartında ve öne çıkanlarda tüm alanı kaplar, yatay/geniş bir görsel kullan.</div>
+    <label>Küçük İkon (isteğe bağlı — klasör listesi ve detay ekranı için, kare — ör. 200x200)</label>
+    <input id="fIconSmall" type="file" accept="image/*">
+    <div class="hint">Boş bırakırsan büyük ikon küçültülerek kullanılır.</div>
     <label>Harici indirme linki (isteğe bağlı — doldurursan dosya yerine bu link kullanılır)</label>
     <input id="fExternalUrl" placeholder="https://...">
 
@@ -241,6 +246,7 @@ document.getElementById('submitBtn').addEventListener('click',async()=>{
   const externalUrl=document.getElementById('fExternalUrl').value.trim();
   const fileInput=document.getElementById('fFile').files[0];
   const iconInput=document.getElementById('fIcon').files[0];
+  const iconSmallInput=document.getElementById('fIconSmall').files[0];
 
   if(!name){log('Mod adı zorunlu.','err');return;}
   if(!fileInput && !externalUrl){log('Ya bir dosya seç ya da harici link gir.','err');return;}
@@ -252,6 +258,7 @@ document.getElementById('submitBtn').addEventListener('click',async()=>{
     const slug=slugify(name);
     let modUrl=externalUrl||null;
     let iconUrl=null;
+    let iconSmallUrl=null;
 
     if(fileInput){
       log('Mod dosyası yükleniyor...');
@@ -273,12 +280,23 @@ document.getElementById('submitBtn').addEventListener('click',async()=>{
       iconUrl=`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${path}`;
     }
 
+    if(iconSmallInput){
+      log('Küçük ikon yükleniyor...');
+      const ext=iconSmallInput.name.split('.').pop();
+      const path=`icons/${slug}-small.${ext}`;
+      const existing=await ghGet(path);
+      const base64=await fileToBase64(iconSmallInput);
+      await ghPut(path,base64,existing?existing.sha:null,'Modio: '+name+' küçük ikonu eklendi');
+      iconSmallUrl=`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${path}`;
+    }
+
     log('Mod listesi güncelleniyor...');
     const {mods,sha}=await loadModsJson();
     const newId=mods.length?Math.max(...mods.map(m=>m.id))+1:1;
     const newMod={id:newId,name,desc,platform,color,downloads,rating,version,author};
     if(modUrl)newMod.url=modUrl;
     if(iconUrl)newMod.icon=iconUrl;
+    if(iconSmallUrl)newMod.iconSmall=iconSmallUrl;
     mods.push(newMod);
     await ghPut('data/mods.json',textToBase64(JSON.stringify(mods,null,2)),sha,'Modio: yeni mod eklendi ('+name+')');
 
@@ -286,6 +304,7 @@ document.getElementById('submitBtn').addEventListener('click',async()=>{
     ['fName','fDesc','fVersion','fAuthor','fDownloads','fRating','fExternalUrl'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('fFile').value='';
     document.getElementById('fIcon').value='';
+    document.getElementById('fIconSmall').value='';
     renderModList();
   }catch(e){
     log('Hata: '+e.message,'err');

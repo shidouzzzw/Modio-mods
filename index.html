@@ -104,13 +104,13 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 .social-icon.wa{background:transparent;border:1.6px solid var(--text);color:var(--text)}
 .footer-note{font-size:13px;color:var(--text-secondary)}
 :root[data-theme="dark"] .social-icon.wa{border-color:var(--text)}
-.info-modal-body{font-size:15px;line-height:1.65;color:var(--text)}
+.info-modal-body{font-size:15px;line-height:1.65;color:var(--text);white-space:pre-line}
 .empty-state{text-align:center;padding:64px 20px;color:var(--text-secondary)}.empty-state .icon{font-size:48px;margin-bottom:16px}
 .page-title{max-width:1100px;margin:0 auto;padding:28px 20px 8px}.page-title h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}.page-title p{color:var(--text-secondary);margin-top:6px;font-size:15px}
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;max-width:1100px;margin:0 auto;padding:20px}
 .cat-card{border-radius:var(--radius);padding:32px 16px 26px;text-align:center;cursor:pointer;transition:transform var(--transition);border:1px solid var(--border);background:var(--surface)}.cat-card:hover{transform:translateY(-3px)}.cat-card:active{transform:scale(.97)}
 .cat-card .icon{font-size:42px;margin-bottom:14px}.cat-card h3{font-size:16px;font-weight:650;margin-bottom:4px}.cat-card span{font-size:13px;color:var(--text-secondary)}
-.cat-card.c-javaclient{background:#e7f8ec}.cat-card.c-bedrock{background:#e8f1ff}.cat-card.c-bedrocktexture{background:#fff3e6}
+.cat-card.c-javaclient{background:#e7f8ec}.cat-card.c-bedrock{background:#e8f1ff}.cat-card.c-bedrocktexture{background:#fff3e6}.cat-card.c-javaplugin{background:#f6ecfc}
 .cat-folder-icon{display:flex;justify-content:center;margin-bottom:14px}
 .numbered-list{max-width:700px;margin:0 auto;padding:8px 20px 40px}
 .numbered-item{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform var(--transition),border-color var(--transition)}.numbered-item:hover{transform:translateY(-2px);border-color:#c7c7cc}
@@ -130,8 +130,10 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 .filter-chip:hover{border-color:#c7c7cc}
 .filter-chip.active{background:var(--text);color:#fff;border-color:var(--text)}
 .guide-list{max-width:700px;margin:0 auto;padding:12px 20px 40px}
-.guide-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
-.guide-item h3{font-size:16px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:10px}.guide-item p{font-size:14px;color:var(--text-secondary);line-height:1.5}
+.guide-item{display:block;width:100%;text-align:left;font-family:inherit;cursor:pointer;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;transition:transform .15s ease,border-color .2s ease}
+.guide-item:hover{border-color:var(--accent)}
+.guide-item:active{transform:scale(.98)}
+.guide-item h3{font-size:16px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:10px;color:var(--text)}.guide-item p{font-size:14px;color:var(--text-secondary);line-height:1.5;margin:0}
 @media(max-width:768px){
   .nav-links{display:none}
   .search-wrap{display:none}
@@ -217,11 +219,12 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 </div>
 <div class="footer-social">
 <a class="social-link" href="https://youtube.com" target="_blank" rel="noopener"><span class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 6.7s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C16.2 3.2 12 3.2 12 3.2h0s-4.2 0-7.7.2c-.5 0-1.5.1-2.4 1-.7.7-.9 2.3-.9 2.3S.8 8.6.8 10.4v1.3c0 1.9.2 3.7.2 3.7s.2 1.6.9 2.3c.9.9 2.1.9 2.6 1 1.9.2 7.5.2 7.5.2s4.2 0 7.7-.2c.5 0 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.7v-1.3c0-1.9-.2-3.7-.2-3.7zM9.7 14.3V7.9l6.1 3.2z"/></svg></span>YouTube</a>
-<a class="social-link" href="https://instagram.com" target="_blank" rel="noopener"><span class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>Instagram</a>
+<a class="social-link" href="https://instagram.com/modio.modsTR" target="_blank" rel="noopener"><span class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>Instagram</a>
 <a class="social-link" href="https://wa.me/" target="_blank" rel="noopener"><span class="social-icon wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.7-1.2A9 9 0 1012 3z"/><path d="M8.4 8.6c.1-.4.6-.4.9-.4.2 0 .4 0 .5.4.2.4.5 1.3.5 1.4.1.1.1.3 0 .4-.1.2-.2.3-.3.4-.1.2-.3.3-.1.6.2.4.8 1.2 1.7 1.9 1.1.9 1.9 1.1 2.2 1.2.2.1.4.1.5-.1.2-.2.6-.7.8-1 .2-.2.4-.2.6-.1l1.4.7c.2.1.4.2.4.3.1.2.1.9-.2 1.4-.3.5-1.4 1.1-2 1.1-.5 0-1.8-.2-3.5-1.4-2-1.3-3.2-3.4-3.4-3.7-.1-.3-.7-1.1-.7-2.1 0-1 .5-1.5.7-1.7z" fill="currentColor" stroke="none"/></svg></span>WhatsApp</a>
 </div>
-<p class="footer-note">Modio · Minecraft Modları · Temiz ve sade arayüz · Bu bir demo sitedir.</p>
+<p class="footer-note">Modio · Minecraft Modları · Temiz ve sade arayüz</p>
 </footer>
+</div>
 
 <div class="modal-overlay" id="infoModal"><div class="modal" id="infoModalSheet">
 <div class="modal-handle"></div>
@@ -229,7 +232,6 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 <p class="info-modal-body" id="infoModalBody"></p>
 <button class="btn-secondary" id="infoModalClose" style="margin-top:26px">Kapat</button>
 </div></div>
-</div>
 
 <div class="page" id="page-categories">
 <div id="catFoldersView"><div class="page-title animate-in"><h1>Klasörler</h1><p>Platform seç, modlar sıralı gelsin</p></div><div class="cat-grid animate-in delay-1" id="catGrid"></div></div>
@@ -247,6 +249,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 <button class="filter-chip" data-filter="platform" data-value="javaclient">Java Clientler</button>
 <button class="filter-chip" data-filter="platform" data-value="bedrock">Bedrock</button>
 <button class="filter-chip" data-filter="platform" data-value="bedrocktexture">Texturepack</button>
+<button class="filter-chip" data-filter="platform" data-value="javaplugin">Plugin</button>
 <span class="filter-label" style="margin-left:12px">Sırala</span>
 <button class="filter-chip active" data-filter="sort" data-value="popular">Popüler</button>
 <button class="filter-chip" data-filter="sort" data-value="rating">Puan</button>
@@ -261,14 +264,16 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 </div>
 
 <div class="page" id="page-guide">
-<div class="page-title animate-in"><h1>Rehber</h1><p>Mod yükleme ve kullanım ipuçları</p></div>
+<div class="page-title animate-in"><h1>Rehber</h1><p>Bedrock modu, Java client, texturepack ve plugin kullanımı hakkında bilmen gerekenler</p></div>
 <div class="guide-list animate-in delay-1">
-<div class="guide-item"><h3><span>1</span> Fabric / Forge nedir?</h3><p>Modları çalıştırmak için gerekli yükleyicilerdir. Çoğu modern mod Fabric kullanır.</p></div>
-<div class="guide-item"><h3><span>2</span> Mod nasıl yüklenir?</h3><p>İndirdiğin .jar dosyasını Minecraft’ın “mods” klasörüne atman yeterli.</p></div>
-<div class="guide-item"><h3><span>3</span> Performans için önerilenler</h3><p>Sodium + Lithium + Iris kombinasyonu genellikle en iyi FPS artışını sağlar.</p></div>
-<div class="guide-item"><h3><span>4</span> Shader kullanmak</h3><p>Iris Shaders ile shader paketlerini yükleyebilirsin.</p></div>
-<div class="guide-item"><h3><span>5</span> Uyumluluk kontrolü</h3><p>Modların Minecraft sürümüne ve birbirine uyumlu olduğundan emin ol.</p></div>
-<div class="guide-item"><h3><span>6</span> Yedek al</h3><p>Büyük değişikliklerden önce dünya klasörünü yedekle.</p></div>
+<div class="guide-item" data-info="guide-bedrock-mod"><h3><span>1</span> Bedrock Modu Nasıl Yüklenir?</h3><p>.mcpack / .mcaddon dosyalarını Minecraft Bedrock'a ekleme adımları.</p></div>
+<div class="guide-item" data-info="guide-texturepack"><h3><span>2</span> Texturepack Nasıl Uygulanır?</h3><p>İndirdiğin doku paketini dünyana veya global ayarlarına ekleme.</p></div>
+<div class="guide-item" data-info="guide-javaclient"><h3><span>3</span> Java Client Nedir, Nasıl Kurulur?</h3><p>Lunar, Badlion, LabyMod gibi istemcilerin kurulumu ve farkları.</p></div>
+<div class="guide-item" data-info="guide-plugin"><h3><span>4</span> Plugin Nedir, Sunucuma Nasıl Eklerim?</h3><p>Paper/Spigot sunucusuna .jar plugin ekleme adımları.</p></div>
+<div class="guide-item" data-info="guide-bedrock-vs-java"><h3><span>5</span> Bedrock ile Java Arasındaki Fark</h3><p>Hangi platformda ne çalışır, mod/client/plugin nerede kullanılır.</p></div>
+<div class="guide-item" data-info="guide-uyumluluk"><h3><span>6</span> Sürüm Uyumluluğu Nasıl Kontrol Edilir?</h3><p>Bir dosyayı yüklemeden önce nelere bakmalısın.</p></div>
+<div class="guide-item" data-info="guide-yedek"><h3><span>7</span> Dünyanı Nasıl Yedeklersin?</h3><p>Büyük bir değişiklik öncesi veri kaybını önleme.</p></div>
+<div class="guide-item" data-info="guide-sorun"><h3><span>8</span> Sorun mu Yaşıyorsun?</h3><p>Mod/client/plugin çalışmadığında izlenecek adımlar.</p></div>
 </div>
 </div>
 
@@ -307,7 +312,7 @@ async function loadMods(){
   if(currentPage==='search')renderSearch(document.getElementById('fullSearch').value);
   if(currentPage==='favorites')renderFavorites();
 }
-const categories=[{id:"bedrock",name:"Bedrock Modları",color:"c-bedrock"},{id:"javaclient",name:"Java Clientler",color:"c-javaclient"},{id:"bedrocktexture",name:"Bedrock Texturepackler",color:"c-bedrocktexture"}];
+const categories=[{id:"bedrock",name:"Bedrock Modları",color:"c-bedrock"},{id:"javaclient",name:"Java Clientler",color:"c-javaclient"},{id:"bedrocktexture",name:"Bedrock Texturepackler",color:"c-bedrocktexture"},{id:"javaplugin",name:"Java Pluginleri",color:"c-javaplugin"}];
 (function(){const saved=localStorage.getItem('modio_theme');if(saved)document.documentElement.setAttribute('data-theme',saved);})();
 document.getElementById('themeToggle').addEventListener('click',()=>{
   const isDark=document.documentElement.getAttribute('data-theme')==='dark';
@@ -319,17 +324,24 @@ document.getElementById('themeToggle').addEventListener('click',()=>{
 let favorites=JSON.parse(localStorage.getItem('modio_favs')||'[]'),currentPage='home';
 const modGrid=document.getElementById('modGrid'),featured=document.getElementById('featured'),modCount=document.getElementById('modCount'),modal=document.getElementById('modal'),modalSheet=document.getElementById('modalSheet'),favGrid=document.getElementById('favGrid'),favEmpty=document.getElementById('favEmpty'),searchGrid=document.getElementById('searchGrid'),searchEmpty=document.getElementById('searchEmpty'),navIndicator=document.getElementById('navIndicator');
 const colorMap={blue:'#007aff',orange:'#ff9500',purple:'#af52de',teal:'#30b0c7',rose:'#ff375f',green:'#34c759'};
-function avatarHTML(mod,size=56){const letter=(mod.name||'?').trim().charAt(0).toUpperCase();const bg=colorMap[mod.color]||'#8e8e93';const fs=Math.round(size*0.42);if(mod.icon)return `<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;overflow:hidden;"><img src="${mod.icon}" alt="${mod.name} icon" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';this.parentElement.textContent='${letter}'"></div>`;return `<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;">${letter}</div>`}
+function handleFillIconError(img,letter,bg){const d=document.createElement('div');d.className='icon-avatar';d.style.cssText=`position:absolute;inset:0;width:100%;height:100%;background:${bg};font-size:32px;`;d.textContent=letter;img.replaceWith(d)}
+function avatarHTML(mod,size=56,fill=false){const letter=(mod.name||'?').trim().charAt(0).toUpperCase();const bg=colorMap[mod.color]||'#8e8e93';const fs=Math.round(size*0.42);
+const src=fill?mod.icon:(mod.iconSmall||mod.icon);
+if(src&&fill)return `<img src="${src}" alt="${mod.name} icon" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" onerror="handleFillIconError(this,'${letter}','${bg}')">`;
+if(src)return `<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;overflow:hidden;"><img src="${src}" alt="${mod.name} icon" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';this.parentElement.textContent='${letter}'"></div>`;
+return `<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;">${letter}</div>`}
 function folderSVG(){return `<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>`}
-const folderColorMap={bedrock:'#0062cc',javaclient:'#1f8a3d',bedrocktexture:'#c26a00'};
+const folderColorMap={bedrock:'#0062cc',javaclient:'#1f8a3d',bedrocktexture:'#c26a00',javaplugin:'#af52de'};
 function heartSVG(active){return `<svg viewBox="0 0 24 24" width="17" height="17" fill="${active?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`}
 function isFav(id){return favorites.includes(id)}
 function toggleFav(id){if(isFav(id))favorites=favorites.filter(f=>f!==id);else favorites.push(id);localStorage.setItem('modio_favs',JSON.stringify(favorites));renderAll();updateModalFavBtn()}
-function createModCard(mod,i=0){const c=document.createElement('article');c.className='mod-card';c.style.animation=`scaleIn 0.28s ease ${i*0.025}s both`;c.innerHTML=`<div class="mod-thumb ${mod.color}">${avatarHTML(mod,56)}<button class="fav-btn ${isFav(mod.id)?'active':''}" data-id="${mod.id}">${heartSVG(isFav(mod.id))}</button></div><div class="mod-body"><div class="mod-title">${mod.name}</div><div class="mod-desc">${mod.desc}</div><div class="mod-meta"><span>↓ ${mod.downloads}</span><span>★ ${mod.rating}</span><span class="badge">${mod.version}</span></div></div>`;c.querySelector('.fav-btn').addEventListener('click',e=>{e.stopPropagation();toggleFav(mod.id)});c.addEventListener('click',()=>openModal(mod));return c}
+function createModCard(mod,i=0){const c=document.createElement('article');c.className='mod-card';c.style.animation=`scaleIn 0.28s ease ${i*0.025}s both`;c.innerHTML=`<div class="mod-thumb ${mod.color}">${avatarHTML(mod,56,true)}<button class="fav-btn ${isFav(mod.id)?'active':''}" data-id="${mod.id}">${heartSVG(isFav(mod.id))}</button></div><div class="mod-body"><div class="mod-title">${mod.name}</div><div class="mod-desc">${mod.desc}</div><div class="mod-meta"><span>↓ ${mod.downloads}</span><span>★ ${mod.rating}</span><span class="badge">${mod.version}</span></div></div>`;c.querySelector('.fav-btn').addEventListener('click',e=>{e.stopPropagation();toggleFav(mod.id)});c.addEventListener('click',()=>openModal(mod));return c}
 function renderHomeMods(){modGrid.innerHTML='';modCount.textContent=mods.length+' mod';mods.forEach((m,i)=>modGrid.appendChild(createModCard(m,i)))}
-function renderFeatured(){featured.innerHTML='';mods.slice(0,5).forEach(mod=>{const c=document.createElement('div');c.className='featured-card';c.innerHTML=`<div class="featured-thumb mod-thumb ${mod.color}">${avatarHTML(mod,64)}</div><div class="featured-body"><div class="featured-title">${mod.name}</div><div class="featured-desc">${mod.desc}</div></div>`;c.addEventListener('click',()=>openModal(mod));featured.appendChild(c)})}
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function renderFeatured(){featured.innerHTML='';shuffle(mods).slice(0,5).forEach(mod=>{const c=document.createElement('div');c.className='featured-card';c.innerHTML=`<div class="featured-thumb mod-thumb ${mod.color}">${avatarHTML(mod,64,true)}</div><div class="featured-body"><div class="featured-title">${mod.name}</div><div class="featured-desc">${mod.desc}</div></div>`;c.addEventListener('click',()=>openModal(mod));featured.appendChild(c)})}
 function renderCategories(){const g=document.getElementById('catGrid');g.innerHTML='';categories.forEach((cat,i)=>{const c=document.createElement('div');c.className=`cat-card ${cat.color}`;c.style.animation=`scaleIn 0.28s ease ${i*0.05}s both`;const cnt=mods.filter(m=>m.platform===cat.id).length;const iconColor=folderColorMap[cat.id]||'#8e8e93';c.innerHTML=`<div class="icon cat-folder-icon" style="color:${iconColor}">${folderSVG()}</div><h3>${cat.name}</h3><span>${cnt} mod</span>`;c.addEventListener('click',()=>openCategory(cat));g.appendChild(c)})}
-function openCategory(cat){const list=mods.filter(m=>m.platform===cat.id);document.getElementById('catFoldersView').style.display='none';document.getElementById('catDetailView').style.display='block';document.getElementById('catDetailTitle').textContent=cat.name;document.getElementById('catDetailCount').textContent=list.length+' mod listeleniyor';const cont=document.getElementById('numberedList');cont.innerHTML='';if(!list.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><p>Bu klasörde henüz mod yok.</p></div>';return}list.forEach((mod,i)=>{const item=document.createElement('div');item.className='numbered-item';item.style.animation=`scaleIn 0.25s ease ${i*0.03}s both`;item.innerHTML=`<div class="num">${i+1}</div><div class="mod-icon mod-thumb ${mod.color}">${avatarHTML(mod,40)}</div><div class="numbered-info"><h4>${mod.name}</h4><p>${mod.desc}</p></div><div class="numbered-meta">★ ${mod.rating}</div>`;item.addEventListener('click',()=>openModal(mod));cont.appendChild(item)});window.scrollTo({top:0,behavior:'smooth'})}
+const categoryItemLabel={bedrock:'Mod',javaclient:'Client',bedrocktexture:'Texturepack',javaplugin:'Plugin'};
+function openCategory(cat){const list=mods.filter(m=>m.platform===cat.id);document.getElementById('catFoldersView').style.display='none';document.getElementById('catDetailView').style.display='block';document.getElementById('catDetailTitle').textContent=cat.name;const itemLabel=categoryItemLabel[cat.id]||'Mod';document.getElementById('catDetailCount').textContent=list.length+' '+itemLabel+' listeleniyor';const cont=document.getElementById('numberedList');cont.innerHTML='';if(!list.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><p>Bu klasörde henüz mod yok.</p></div>';return}list.forEach((mod,i)=>{const item=document.createElement('div');item.className='numbered-item';item.style.animation=`scaleIn 0.25s ease ${i*0.03}s both`;item.innerHTML=`<div class="num">${i+1}</div><div class="mod-icon mod-thumb ${mod.color}">${avatarHTML(mod,40)}</div><div class="numbered-info"><h4>${mod.name}</h4><p>${mod.desc}</p></div><div class="numbered-meta">★ ${mod.rating}</div>`;item.addEventListener('click',()=>openModal(mod));cont.appendChild(item)});window.scrollTo({top:0,behavior:'smooth'})}
 document.getElementById('backToFolders').addEventListener('click',()=>{document.getElementById('catDetailView').style.display='none';document.getElementById('catFoldersView').style.display='block'});
 function renderFavorites(){favGrid.innerHTML='';const favs=mods.filter(m=>isFav(m.id));favEmpty.style.display=favs.length?'none':'block';favs.forEach((m,i)=>favGrid.appendChild(createModCard(m,i)))}
 let searchPlatform='all',searchSort='popular';
@@ -359,7 +371,7 @@ document.querySelectorAll('#searchFilters .filter-chip').forEach(chip=>{
   });
 });
 function renderAll(){renderHomeMods();renderFeatured();renderFavorites();if(currentPage==='search')renderSearch(document.getElementById('fullSearch').value)}
-function openModal(mod){document.getElementById('modalIcon').className='modal-icon';document.getElementById('modalIcon').innerHTML=avatarHTML(mod,60);document.getElementById('modalTitle').textContent=mod.name;document.getElementById('modalAuthor').textContent='Geliştirici: '+mod.author;document.getElementById('modalDownloads').textContent=mod.downloads;document.getElementById('modalRating').textContent=mod.rating;document.getElementById('modalVersion').textContent=mod.version;const platformLabels={javaclient:'Java Client',bedrock:'Bedrock',bedrocktexture:'Texturepack'};document.getElementById('modalPlatform').textContent=platformLabels[mod.platform]||mod.platform;document.getElementById('modalDesc').textContent=mod.desc;document.getElementById('modalFavBtn').dataset.id=mod.id;currentModUrl=mod.url||null;updateModalFavBtn();modal.classList.add('open');document.body.style.overflow='hidden';modalSheet.style.transform=''}
+function openModal(mod){document.getElementById('modalIcon').className='modal-icon';document.getElementById('modalIcon').innerHTML=avatarHTML(mod,60);document.getElementById('modalTitle').textContent=mod.name;document.getElementById('modalAuthor').textContent='Geliştirici: '+mod.author;document.getElementById('modalDownloads').textContent=mod.downloads;document.getElementById('modalRating').textContent=mod.rating;document.getElementById('modalVersion').textContent=mod.version;const platformLabels={javaclient:'Java Client',bedrock:'Bedrock',bedrocktexture:'Texturepack',javaplugin:'Plugin'};document.getElementById('modalPlatform').textContent=platformLabels[mod.platform]||mod.platform;document.getElementById('modalDesc').textContent=mod.desc;document.getElementById('modalFavBtn').dataset.id=mod.id;currentModUrl=mod.url||null;updateModalFavBtn();modal.classList.add('open');document.body.style.overflow='hidden';modalSheet.style.transform=''}
 function updateModalFavBtn(){const b=document.getElementById('modalFavBtn');b.textContent=isFav(+b.dataset.id)?'Favorilerden Çıkar':'Favorilere Ekle'}
 function closeModal(){modal.classList.remove('open');document.body.style.overflow='';modalSheet.style.transform='';modalSheet.classList.remove('dragging')}
 let startY=0,currentY=0,isDragging=false;
@@ -397,11 +409,19 @@ document.getElementById('modalFavBtn').addEventListener('click',()=>toggleFav(+d
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
 const footerInfo={
-  legal:{title:'Yasal Uyarı',body:'Modio bir demo/vitrin sitesidir. Burada listelenen modlar, istemciler ve doku paketleri kendi geliştiricilerine aittir; Modio bu içeriklerin sahibi, resmi dağıtıcısı veya temsilcisi değildir. İndirme bağlantıları ilgili projelerin kendi resmi sayfalarına yönlendirir. Kullanım, ilgili modun kendi lisans şartlarına tabidir.'},
+  legal:{title:'Yasal Uyarı',body:'Modio bir mod arşiv ve indirme sitesidir. Burada listelenen modlar, istemciler ve doku paketleri kendi geliştiricilerine aittir; Modio bu içeriklerin sahibi, resmi dağıtıcısı veya temsilcisi değildir. İndirme bağlantıları ilgili projelerin kendi resmi sayfalarına veya reponuzdaki dosyalara yönlendirir. Kullanım, ilgili modun kendi lisans şartlarına tabidir.'},
   privacy:{title:'Gizlilik Politikası',body:'Modio, hesap oluşturmanızı gerektirmez ve kişisel verilerinizi sunucularında toplamaz. Favori listesi ve tema tercihi gibi ayarlar yalnızca kendi cihazınızdaki tarayıcı deposunda (localStorage) tutulur ve tarayıcı verilerinizi temizlediğinizde silinir.'},
   cookies:{title:'Çerez Politikası',body:'Bu site takip amaçlı çerez kullanmaz. Sadece tema tercihiniz ve favori modlarınız gibi bilgiler, tarayıcınızın yerel deposunda (localStorage) cihazınızda saklanır; üçüncü taraflarla paylaşılmaz.'},
   removal:{title:'Kaldırma Talebi',body:'Listelenen bir içeriğin kaldırılmasını talep etmek, hatalı bilgi bildirmek veya telif hakkı ile ilgili bir sorunu iletmek isterseniz İletişim bölümündeki kanaldan bize ulaşabilirsiniz. Talepler incelenip makul sürede yanıtlanır.'},
-  contact:{title:'İletişim',body:'Sorularınız, önerileriniz veya iş birliği talepleriniz için bize sosyal medya hesaplarımızdan veya WhatsApp üzerinden ulaşabilirsiniz. Geri bildirimleriniz Modio\u2019yu geliştirmemize yardımcı olur.'}
+  contact:{title:'İletişim',body:'Sorularınız, önerileriniz veya iş birliği talepleriniz için bize sosyal medya hesaplarımızdan veya WhatsApp üzerinden ulaşabilirsiniz. Geri bildirimleriniz Modio\u2019yu geliştirmemize yardımcı olur.'},
+  'guide-bedrock-mod':{title:'Bedrock Modu Nasıl Yüklenir?',body:'Bedrock Edition\u2019da "mod" genellikle .mcpack veya .mcaddon uzantılı davranış/kaynak paketleri şeklinde gelir.\n\n1. Modio\u2019dan istediğin Bedrock modunun İndir butonuna dokun.\n2. Dosya inince üzerine dokun; telefon otomatik olarak Minecraft\u2019ı açıp içe aktarma ekranını gösterir.\n3. Minecraft\u2019ı aç, Ayarlar > Depolama > Paketler kısmından paketin yüklendiğini doğrula.\n4. Yeni veya var olan bir dünyaya gir, Dünyayı Düzenle > Davranış Paketleri / Kaynak Paketleri sekmesinden modu "Etkin" listesine ekle.\n5. Dünyayı kaydet ve gir.\n\nNot: .mcaddon dosyaları hem davranış hem kaynak paketini birlikte içerir, ikisini de aynı dünyaya eklemen gerekir.'},
+  'guide-texturepack':{title:'Texturepack Nasıl Uygulanır?',body:'Texturepack (doku paketi), oyunun görsellerini değiştirir, oynanışı etkilemez.\n\n1. Modio\u2019dan istediğin paketi indir (.mcpack).\n2. Dosyaya dokun, Minecraft otomatik olarak paketi kaynak paketleri listene ekler.\n3. Global olarak uygulamak için: Ayarlar > Global Kaynak Paketleri > paketi "Etkin" listesine taşı.\n4. Sadece belirli bir dünyada kullanmak için: o dünyayı düzenle > Kaynak Paketleri > paketi etkinleştir.\n5. Birden fazla paket kullanıyorsan, listedeki sıralama önemlidir; en üstteki paket diğerlerinin üzerine yazılır.\n\nİpucu: Bir paket bozuk görünüyorsa (pembe-siyah kareler), paket Bedrock\u2019un o an oynadığın sürümüyle uyumlu olmayabilir.'},
+  'guide-javaclient':{title:'Java Client Nedir, Nasıl Kurulur?',body:'Java client, orijinal Minecraft Java Edition\u2019ın üzerine kurulan; performans artışı, kozmetik eşyalar ve bazen dahili sunucular sunan alternatif bir başlatıcıdır (launcher). Sunucularda hile olarak sayılmaz, çoğu client resmi olarak izinlidir.\n\n1. Modio\u2019dan istediğin clientın (Lunar, Badlion, LabyMod vb.) sayfasına git, "İndir" ile resmi kurulum dosyasına yönlendirilirsin.\n2. İndirilen kurulum dosyasını çalıştır, ekrandaki adımları takip et.\n3. Client kendi başlatıcısını açar; Microsoft/Mojang hesabınla giriş yap.\n4. İstediğin Minecraft sürümünü ve mod/performans ayarlarını seç, "Oynat" de.\n\nNot: Bazı sunucular belirli clientları yasaklayabilir, katılmadan önce sunucunun kurallarını kontrol et.'},
+  'guide-plugin':{title:'Plugin Nedir, Sunucuma Nasıl Eklerim?',body:'Plugin\u2019ler, mod gibi istemciye değil, bir Minecraft sunucusuna (Paper/Spigot) yüklenen eklentilerdir. Oyuncuların istemcisinde herhangi bir kurulum gerektirmez.\n\n1. Sunucunun Paper veya Spigot altyapısıyla çalıştığından emin ol (Vanilla sunucularda plugin çalışmaz).\n2. Modio\u2019dan istediğin pluginin .jar dosyasını indir.\n3. Sunucu dosyalarında bulunan "plugins" klasörüne bu .jar dosyasını at.\n4. Sunucuyu yeniden başlat (restart) — plugin ilk açılışta kendi ayar dosyalarını oluşturur.\n5. Gerekiyorsa "plugins/PluginAdı/config.yml" dosyasından ayarlarını düzenle, sunucuyu tekrar başlat.\n\nNot: Bazı pluginler başka bir plugine bağımlı olabilir (ör. Vault); açıklamasında "gereksinimler" kısmını mutlaka kontrol et.'},
+  'guide-bedrock-vs-java':{title:'Bedrock ile Java Arasındaki Fark',body:'Java Edition: Bilgisayarda çalışır, mod desteği için Forge/Fabric gibi ek yükleyiciler gerekir, sunucu tarafı eklentileri (plugin) Paper/Spigot ile çalışır.\n\nBedrock Edition: Mobil, konsol, Windows ve tabletlerde çalışır; PC, telefon ve konsoldaki oyuncular aynı sunucuda buluşabilir (cross-play). Modlar yerine davranış/kaynak paketleri (.mcpack, .mcaddon) kullanılır, ekstra program gerekmez.\n\nModio\u2019da bu yüzden içerikler platforma göre ayrılıyor: Bedrock Modları ve Texturepackler Bedrock oyuncuları için, Java Clientler ve Pluginler ise Java Edition oyuncuları ve sunucu sahipleri için hazırlanmıştır.'},
+  'guide-uyumluluk':{title:'Sürüm Uyumluluğu Nasıl Kontrol Edilir?',body:'Bir dosyayı indirip yüklemeden önce şunlara bak:\n\n1. Mod/plugin/texturepack sayfasındaki "Versiyon" bilgisinin, senin oynadığın Minecraft sürümüyle aynı veya uyumlu olduğundan emin ol.\n2. Java tarafında ayrıca kullandığın Forge/Fabric sürümünün de o mod ile uyumlu olduğunu kontrol et (mod açıklamasında genelde belirtilir).\n3. Birden fazla mod/plugin kullanıyorsan, aralarında çakışma olup olmadığını küçük gruplar halinde test ederek anla (hepsini aynı anda eklemek yerine birer birer ekleyip dünyayı aç).\n4. Sunucu işletiyorsan, pluginin sunucu yazılımınla (Paper/Spigot) ve sürümüyle uyumlu olduğunu resmi sayfasından teyit et.\n\nUyumsuz bir sürüm genellikle oyunun açılmamasına, çökmesine (crash) veya modun hiç görünmemesine sebep olur.'},
+  'guide-yedek':{title:'Dünyanı Nasıl Yedeklersin?',body:'Yeni bir mod, plugin veya texturepack denemeden önce dünyanı yedeklemen, olası bir bozulmada verini kaybetmeni önler.\n\nJava Edition: .minecraft/saves klasöründeki ilgili dünya klasörünü kopyalayıp başka bir yere (harici disk, bulut) yapıştırman yeterlidir.\n\nBedrock Edition: Oyun içinde dünyayı düzenle ekranından "Dışa Aktar" (Export) seçeneğini kullanarak dünyayı bir .mcworld dosyası olarak dışa aktarabilir, bu dosyayı güvenli bir yere kaydedebilirsin.\n\nSunucu işletenler için: Sunucu dosyalarındaki "world" klasörünü (ve varsa world_nether, world_the_end) düzenli aralıklarla yedekle, mümkünse otomatik yedekleme pluginleri kullan.'},
+  'guide-sorun':{title:'Sorun mu Yaşıyorsun?',body:'Bir mod, client, plugin veya texturepack beklendiği gibi çalışmıyorsa sırayla şunları dene:\n\n1. Sürüm uyumunu kontrol et — çoğu sorunun sebebi budur.\n2. Sadece yeni eklediğin dosyayı kaldırıp sorunun geçip geçmediğine bak; geçiyorsa sorun o dosyadadır.\n3. Java tarafında Forge/Fabric\u2019in ve tüm modların güncel/uyumlu sürümde olduğundan emin ol.\n4. Sunucu pluginlerinde, sunucu konsolundaki hata (error) loglarını kontrol et; genelde eksik bir bağımlılığı (dependency) işaret eder.\n5. Hâlâ çözemediysen İletişim bölümünden bize dosyanın adını ve karşılaştığın hatayı yazarak ulaşabilirsin.'}
 };
 const infoModal=document.getElementById('infoModal'),infoModalSheet=document.getElementById('infoModalSheet');
 function openInfoModal(key){
@@ -410,11 +430,17 @@ function openInfoModal(key){
   document.getElementById('infoModalBody').textContent=info.body;
   infoModal.classList.add('open');document.body.style.overflow='hidden';infoModalSheet.style.transform='';
 }
-function closeInfoModal(){infoModal.classList.remove('open');document.body.style.overflow=''}
-document.querySelectorAll('.footer-link').forEach(link=>link.addEventListener('click',()=>openInfoModal(link.dataset.info)));
+function closeInfoModal(){infoModal.classList.remove('open');document.body.style.overflow='';infoModalSheet.style.transform='';infoModalSheet.classList.remove('dragging')}
+document.querySelectorAll('.footer-link, .guide-item').forEach(link=>link.addEventListener('click',()=>openInfoModal(link.dataset.info)));
 document.getElementById('infoModalClose').addEventListener('click',closeInfoModal);
 infoModal.addEventListener('click',e=>{if(e.target===infoModal)closeInfoModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeInfoModal()});
+
+let infoStartY=0,infoCurrentY=0,infoDragging=false;
+function onInfoDragStart(e){const y=e.touches?e.touches[0].clientY:e.clientY;infoStartY=y;infoCurrentY=y;infoDragging=true;infoModalSheet.classList.add('dragging')}
+function onInfoDragMove(e){if(!infoDragging)return;const y=e.touches?e.touches[0].clientY:e.clientY;infoCurrentY=y;const d=infoCurrentY-infoStartY;if(d>0){infoModalSheet.style.transform=`translateY(${d}px)`;const p=Math.min(d/300,1);infoModal.style.background=`rgba(0,0,0,${0.35*(1-p*0.7)})`}}
+function onInfoDragEnd(){if(!infoDragging)return;infoDragging=false;infoModalSheet.classList.remove('dragging');const d=infoCurrentY-infoStartY;if(d>120){infoModalSheet.style.transition='transform 0.28s cubic-bezier(0.32,0.72,0,1)';infoModalSheet.style.transform='translateY(110%)';infoModal.style.transition='opacity 0.28s ease';infoModal.style.opacity='0';setTimeout(()=>{closeInfoModal();infoModal.style.opacity='';infoModal.style.background='';infoModalSheet.style.transition=''},280)}else{infoModalSheet.style.transition='transform 0.3s cubic-bezier(0.32,0.72,0,1)';infoModalSheet.style.transform='translateY(0)';infoModal.style.background='';setTimeout(()=>{infoModalSheet.style.transition=''},300)}}
+infoModalSheet.addEventListener('touchstart',onInfoDragStart,{passive:true});infoModalSheet.addEventListener('touchmove',onInfoDragMove,{passive:true});infoModalSheet.addEventListener('touchend',onInfoDragEnd);infoModalSheet.addEventListener('mousedown',onInfoDragStart);window.addEventListener('mousemove',onInfoDragMove);window.addEventListener('mouseup',onInfoDragEnd);
 
 updateIndicator(0);loadMods();
 </script>
