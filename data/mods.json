@@ -1,18 +1,5 @@
 [
   {
-    "id": 13,
-    "name": "Action & Stuff",
-    "desc": "Bedrock için animasyon ve efekt paketi. Daha canlı hareketler.",
-    "platform": "bedrock",
-    "color": "purple",
-    "downloads": "4.2M",
-    "rating": "4.6",
-    "version": "1.21",
-    "author": "Spark Universe",
-    "url": "https://github.com/shidouzzzw/Modio-mods/raw/refs/heads/main/mods/action-and-stuff.mcpack",
-    "icon": "https://github.com/shidouzzzw/Modio-mods/raw/refs/heads/main/icons/action-and-stuff.png"
-  },
-  {
     "id": 14,
     "name": "Better on Bedrock",
     "desc": "Bedrock deneyimini geliştiren kapsamlı kalite of life modu.",
