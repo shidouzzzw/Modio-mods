@@ -1,16 +1,5 @@
 [
   {
-    "id": 14,
-    "name": "Better on Bedrock",
-    "desc": "Bedrock deneyimini geliştiren kapsamlı kalite of life modu.",
-    "platform": "bedrock",
-    "color": "teal",
-    "downloads": "2.8M",
-    "rating": "4.7",
-    "version": "1.21",
-    "author": "PoeticRainbow"
-  },
-  {
     "id": 16,
     "name": "Lunar Client",
     "desc": "Performans artışı, kozmetikler ve dahili pratik sunucularıyla gelen popüler bir Java istemcisi.",
