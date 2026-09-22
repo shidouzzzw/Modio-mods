@@ -1,14 +1,1 @@
-[
-  {
-    "id": 17,
-    "name": "Badlion Client",
-    "desc": "FPS artışı, mod desteği ve PvP pratik sunucularıyla bilinen bir Java istemcisi.",
-    "platform": "javaclient",
-    "color": "green",
-    "downloads": "6M+",
-    "rating": "4.6",
-    "version": "1.20.4",
-    "author": "Badlion",
-    "url": "https://www.badlion.net/"
-  }
-]
+[]
