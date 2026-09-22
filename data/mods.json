@@ -68,16 +68,5 @@
     "version": "1.21",
     "author": "Faithful Team",
     "url": "https://faithfulpack.net/"
-  },
-  {
-    "id": 20,
-    "name": "Dokucraft Bedrock",
-    "desc": "Ortaçağ esintili, detaylı ve atmosferik bir doku paketi. Klasik bir Java paketinin Bedrock'a taşınmış hali.",
-    "platform": "bedrocktexture",
-    "color": "purple",
-    "downloads": "1.2M",
-    "rating": "4.5",
-    "version": "1.20",
-    "author": "Dokucraft Team"
   }
 ]
