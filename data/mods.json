@@ -90,17 +90,5 @@
     "rating": "4.4",
     "version": "1.21",
     "author": "BV Studio"
-  },
-  {
-    "id": 22,
-    "name": "EssentialsX",
-    "desc": "Sunucu yönetimi için temel komutları (spawn, ev, tp, kit vb.) ekleyen en yaygın Paper/Spigot pluginidir.",
-    "platform": "javaplugin",
-    "color": "teal",
-    "downloads": "50M+",
-    "rating": "4.8",
-    "version": "1.21",
-    "author": "EssentialsX Team",
-    "url": "https://essentialsx.net/"
   }
 ]
