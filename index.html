@@ -110,11 +110,45 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;max-width:1100px;margin:0 auto;padding:20px}
 .cat-card{border-radius:var(--radius);padding:32px 16px 26px;text-align:center;cursor:pointer;transition:transform var(--transition);border:1px solid var(--border);background:var(--surface)}.cat-card:hover{transform:translateY(-3px)}.cat-card:active{transform:scale(.97)}
 .cat-card .icon{font-size:42px;margin-bottom:14px}.cat-card h3{font-size:16px;font-weight:650;margin-bottom:4px}.cat-card span{font-size:13px;color:var(--text-secondary)}
-.cat-card.c-javaclient{background:#e7f8ec}.cat-card.c-bedrock{background:#e8f1ff}.cat-card.c-bedrocktexture{background:#fff3e6}.cat-card.c-javaplugin{background:#f6ecfc}
+.cat-card.c-javaclient{background:#e7f8ec}.cat-card.c-bedrock{background:#e8f1ff}.cat-card.c-bedrocktexture{background:#fff3e6}.cat-card.c-javaplugin{background:#f6ecfc}.cat-card.c-servers{background:#eef6ff}
 .cat-folder-icon{display:flex;justify-content:center;margin-bottom:14px}
+/* Sunucu kartları & sıralama */
+.server-rank-list{display:flex;flex-direction:column;gap:10px}
+.server-rank-item{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:transform var(--transition),border-color var(--transition)}
+.server-rank-item:hover{transform:translateY(-2px);border-color:#c7c7cc}
+.server-rank-num{width:28px;height:28px;border-radius:8px;background:var(--surface-2,#f5f5f7);display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--text-secondary);flex-shrink:0}
+.server-rank-num.top1{background:#fff3cd;color:#b45309}
+.server-rank-num.top2{background:#f0f0f0;color:#6b7280}
+.server-rank-num.top3{background:#fde8d8;color:#c2410c}
+.server-rank-info{flex:1;min-width:0}
+.server-rank-info h4{font-size:15px;font-weight:600;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.server-rank-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px}
+.platform-badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}
+.platform-badge.java{background:#e7f8ec;color:#1f8a3d}
+.platform-badge.bedrock{background:#e8f1ff;color:#0062cc}
+.players-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}
+.players-badge.high{background:#e7f8ec;color:#1f8a3d}
+.players-badge.mid{background:#fff3e6;color:#c26a00}
+.players-badge.low{background:#f5f5f7;color:#6e6e73}
+.server-ip{font-size:12px;color:var(--text-secondary);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+:root[data-theme="dark"] .platform-badge.java{background:rgba(31,138,61,.2);color:#4ade80}
+:root[data-theme="dark"] .platform-badge.bedrock{background:rgba(0,98,204,.22);color:#60a5fa}
+:root[data-theme="dark"] .players-badge.high{background:rgba(31,138,61,.2);color:#4ade80}
+:root[data-theme="dark"] .players-badge.mid{background:rgba(194,106,0,.2);color:#fb923c}
+:root[data-theme="dark"] .players-badge.low{background:var(--surface-2);color:var(--text-secondary)}
+:root[data-theme="dark"] .server-rank-num{background:var(--surface-2)}
+:root[data-theme="dark"] .server-rank-num.top1{background:rgba(180,83,9,.25);color:#fbbf24}
+:root[data-theme="dark"] .server-rank-num.top2{background:var(--surface-2);color:#d1d5db}
+:root[data-theme="dark"] .server-rank-num.top3{background:rgba(194,65,12,.2);color:#fb923c}
 .numbered-list{max-width:700px;margin:0 auto;padding:8px 20px 40px}
 .numbered-item{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform var(--transition),border-color var(--transition)}.numbered-item:hover{transform:translateY(-2px);border-color:#c7c7cc}
 .num{width:32px;height:32px;border-radius:10px;background:#ffffff;display:grid;place-items:center;font-weight:700;font-size:14px;color:var(--text-secondary);flex-shrink:0}
+.num.top1{background:#fff3cd;color:#b45309}
+.num.top2{background:#f0f0f0;color:#6b7280}
+.num.top3{background:#fde8d8;color:#c2410c}
+:root[data-theme="dark"] .num.top1{background:rgba(180,83,9,.25);color:#fbbf24}
+:root[data-theme="dark"] .num.top2{background:var(--surface-2);color:#d1d5db}
+:root[data-theme="dark"] .num.top3{background:rgba(194,65,12,.2);color:#fb923c}
 .numbered-item .mod-icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:24px;flex-shrink:0;background:#ffffff}
 .numbered-info{flex:1;min-width:0}.numbered-info h4{font-size:15px;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.numbered-info p{font-size:12px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .numbered-meta{font-size:12px;color:var(--text-secondary);flex-shrink:0}
@@ -205,6 +239,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 <section class="hero animate-in"><h1>Minecraft Modları</h1><p>Temiz, hızlı ve sade. En iyi modları tek yerden keşfet.</p></section>
 <section class="section animate-in delay-1"><div class="section-header"><h2 class="section-title">Öne Çıkanlar</h2><a class="see-all" data-page="categories">Klasörlere Git</a></div><div class="featured-scroll" id="featured"></div></section>
 <section class="section animate-in delay-2"><div class="section-header"><h2 class="section-title">Popüler Modlar</h2><span class="see-all" id="modCount">15 mod</span></div><div class="mod-grid" id="modGrid"></div></section>
+<section class="section animate-in"><div class="section-header"><h2 class="section-title">Sunucu Sıralaması</h2><a class="see-all" data-page="categories" id="seeAllServers">Tümünü Gör</a></div><div class="server-rank-list" id="serverRankList"></div><div class="empty-state" id="serverRankEmpty" style="display:none;padding:32px 20px"><div class="icon">🖥️</div><p>Henüz sunucu eklenmemiş.</p></div></section>
 <footer class="site-footer">
 <div class="footer-links">
 <div class="footer-col">
@@ -296,9 +331,11 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-se
 </div></div>
 
 <script>
-const GITHUB_OWNER="shidouzzzw",GITHUB_REPO="Modio-mods",GITHUB_BRANCH="main",MODS_JSON_PATH="data/mods.json";
+const GITHUB_OWNER="shidouzzzw",GITHUB_REPO="Modio-mods",GITHUB_BRANCH="main",MODS_JSON_PATH="data/mods.json",SERVERS_JSON_PATH="data/servers.json";
 const MODS_JSON_URL=`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${MODS_JSON_PATH}?t=${Date.now()}`;
+const SERVERS_JSON_URL=`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${SERVERS_JSON_PATH}?t=${Date.now()}`;
 let mods=[];
+let servers=[];
 async function loadMods(){
   try{
     const res=await fetch(MODS_JSON_URL,{cache:'no-store'});
@@ -308,11 +345,19 @@ async function loadMods(){
     console.error('Mod verisi yüklenemedi:',e);
     mods=[];
   }
-  renderFeatured();renderHomeMods();renderCategories();
+  try{
+    const res=await fetch(SERVERS_JSON_URL,{cache:'no-store'});
+    if(res.ok)servers=await res.json();
+    else servers=[];
+  }catch(e){
+    console.error('Sunucu verisi yüklenemedi:',e);
+    servers=[];
+  }
+  renderFeatured();renderHomeMods();renderCategories();renderServerRank();
   if(currentPage==='search')renderSearch(document.getElementById('fullSearch').value);
   if(currentPage==='favorites')renderFavorites();
 }
-const categories=[{id:"bedrock",name:"Bedrock Modları",color:"c-bedrock"},{id:"javaclient",name:"Java Clientler",color:"c-javaclient"},{id:"bedrocktexture",name:"Bedrock Texturepackler",color:"c-bedrocktexture"},{id:"javaplugin",name:"Java Pluginleri",color:"c-javaplugin"}];
+const categories=[{id:"bedrock",name:"Bedrock Modları",color:"c-bedrock"},{id:"javaclient",name:"Java Clientler",color:"c-javaclient"},{id:"bedrocktexture",name:"Bedrock Texturepackler",color:"c-bedrocktexture"},{id:"javaplugin",name:"Java Pluginleri",color:"c-javaplugin"},{id:"servers",name:"Sunucular",color:"c-servers"}];
 (function(){const saved=localStorage.getItem('modio_theme');if(saved)document.documentElement.setAttribute('data-theme',saved);})();
 document.getElementById('themeToggle').addEventListener('click',()=>{
   const isDark=document.documentElement.getAttribute('data-theme')==='dark';
@@ -331,7 +376,11 @@ if(src&&fill)return `<img src="${src}" alt="${mod.name} icon" style="position:ab
 if(src)return `<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;overflow:hidden;"><img src="${src}" alt="${mod.name} icon" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';this.parentElement.textContent='${letter}'"></div>`;
 return `<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;">${letter}</div>`}
 function folderSVG(){return `<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>`}
-const folderColorMap={bedrock:'#0062cc',javaclient:'#1f8a3d',bedrocktexture:'#c26a00',javaplugin:'#af52de'};
+const folderColorMap={bedrock:'#0062cc',javaclient:'#1f8a3d',bedrocktexture:'#c26a00',javaplugin:'#af52de',servers:'#007aff'};
+function playersTier(n){const p=Number(n)||0;if(p>=500)return'high';if(p>=50)return'mid';return'low'}
+function formatPlayers(n){const p=Number(n)||0;if(p>=1000)return(p/1000).toFixed(p%1000===0?0:1)+'K';return String(p)}
+function sortedServers(){return [...servers].sort((a,b)=>(Number(b.players)||0)-(Number(a.players)||0))}
+function serverAvatarHTML(s,size=56){const letter=(s.name||'?').trim().charAt(0).toUpperCase();const bg=colorMap[s.color]||(s.platform==='java'?'#1f8a3d':'#0062cc');const fs=Math.round(size*0.42);if(s.icon)return`<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px;overflow:hidden"><img src="${s.icon}" alt="" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.parentElement.textContent='${letter}'"></div>`;return`<div class="icon-avatar" style="width:${size}px;height:${size}px;background:${bg};font-size:${fs}px">${letter}</div>`}
 function heartSVG(active){return `<svg viewBox="0 0 24 24" width="17" height="17" fill="${active?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`}
 function isFav(id){return favorites.includes(id)}
 function toggleFav(id){if(isFav(id))favorites=favorites.filter(f=>f!==id);else favorites.push(id);localStorage.setItem('modio_favs',JSON.stringify(favorites));renderAll();updateModalFavBtn()}
@@ -339,9 +388,100 @@ function createModCard(mod,i=0){const c=document.createElement('article');c.clas
 function renderHomeMods(){modGrid.innerHTML='';modCount.textContent=mods.length+' mod';mods.forEach((m,i)=>modGrid.appendChild(createModCard(m,i)))}
 function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function renderFeatured(){featured.innerHTML='';shuffle(mods).slice(0,5).forEach(mod=>{const c=document.createElement('div');c.className='featured-card';c.innerHTML=`<div class="featured-thumb mod-thumb ${mod.color}">${avatarHTML(mod,64,true)}</div><div class="featured-body"><div class="featured-title">${mod.name}</div><div class="featured-desc">${mod.desc}</div></div>`;c.addEventListener('click',()=>openModal(mod));featured.appendChild(c)})}
-function renderCategories(){const g=document.getElementById('catGrid');g.innerHTML='';categories.forEach((cat,i)=>{const c=document.createElement('div');c.className=`cat-card ${cat.color}`;c.style.animation=`scaleIn 0.28s ease ${i*0.05}s both`;const cnt=mods.filter(m=>m.platform===cat.id).length;const iconColor=folderColorMap[cat.id]||'#8e8e93';c.innerHTML=`<div class="icon cat-folder-icon" style="color:${iconColor}">${folderSVG()}</div><h3>${cat.name}</h3><span>${cnt} mod</span>`;c.addEventListener('click',()=>openCategory(cat));g.appendChild(c)})}
-const categoryItemLabel={bedrock:'Mod',javaclient:'Client',bedrocktexture:'Texturepack',javaplugin:'Plugin'};
-function openCategory(cat){const list=mods.filter(m=>m.platform===cat.id);document.getElementById('catFoldersView').style.display='none';document.getElementById('catDetailView').style.display='block';document.getElementById('catDetailTitle').textContent=cat.name;const itemLabel=categoryItemLabel[cat.id]||'Mod';document.getElementById('catDetailCount').textContent=list.length+' '+itemLabel+' listeleniyor';const cont=document.getElementById('numberedList');cont.innerHTML='';if(!list.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><p>Bu klasörde henüz mod yok.</p></div>';return}list.forEach((mod,i)=>{const item=document.createElement('div');item.className='numbered-item';item.style.animation=`scaleIn 0.25s ease ${i*0.03}s both`;item.innerHTML=`<div class="num">${i+1}</div><div class="mod-icon mod-thumb ${mod.color}">${avatarHTML(mod,40)}</div><div class="numbered-info"><h4>${mod.name}</h4><p>${mod.desc}</p></div><div class="numbered-meta">★ ${mod.rating}</div>`;item.addEventListener('click',()=>openModal(mod));cont.appendChild(item)});window.scrollTo({top:0,behavior:'smooth'})}
+function renderCategories(){const g=document.getElementById('catGrid');g.innerHTML='';categories.forEach((cat,i)=>{const c=document.createElement('div');c.className=`cat-card ${cat.color}`;c.style.animation=`scaleIn 0.28s ease ${i*0.05}s both`;const cnt=cat.id==='servers'?servers.length:mods.filter(m=>m.platform===cat.id).length;const iconColor=folderColorMap[cat.id]||'#8e8e93';const label=cat.id==='servers'?(cnt+' sunucu'):(cnt+' mod');c.innerHTML=`<div class="icon cat-folder-icon" style="color:${iconColor}">${folderSVG()}</div><h3>${cat.name}</h3><span>${label}</span>`;c.addEventListener('click',()=>openCategory(cat));g.appendChild(c)})}
+const categoryItemLabel={bedrock:'Mod',javaclient:'Client',bedrocktexture:'Texturepack',javaplugin:'Plugin',servers:'Sunucu'};
+function openCategory(cat){
+  document.getElementById('catFoldersView').style.display='none';
+  document.getElementById('catDetailView').style.display='block';
+  document.getElementById('catDetailTitle').textContent=cat.name;
+  const cont=document.getElementById('numberedList');
+  cont.innerHTML='';
+  if(cat.id==='servers'){
+    const list=sortedServers();
+    document.getElementById('catDetailCount').textContent=list.length+' sunucu · oyuncu sayısına göre';
+    if(!list.length){cont.innerHTML='<div class="empty-state"><div class="icon">🖥️</div><p>Henüz sunucu eklenmemiş.</p></div>';return}
+    list.forEach((s,i)=>{
+      const item=document.createElement('div');
+      item.className='numbered-item';
+      item.style.animation=`scaleIn 0.25s ease ${i*0.03}s both`;
+      const tier=playersTier(s.players);
+      const plat=s.platform==='java'?'java':'bedrock';
+      const platLabel=s.platform==='java'?'Java':'Bedrock';
+      item.innerHTML=`<div class="num ${i<3?'top'+(i+1):''}">${i+1}</div><div class="mod-icon">${serverAvatarHTML(s,40)}</div><div class="numbered-info"><h4>${s.name}</h4><p>${s.desc||''}</p></div><div class="numbered-meta"><span class="platform-badge ${plat}">${platLabel}</span> <span class="players-badge ${tier}">${formatPlayers(s.players)} oyuncu</span></div>`;
+      item.addEventListener('click',()=>openServerModal(s));
+      cont.appendChild(item);
+    });
+  }else{
+    const list=mods.filter(m=>m.platform===cat.id);
+    const itemLabel=categoryItemLabel[cat.id]||'Mod';
+    document.getElementById('catDetailCount').textContent=list.length+' '+itemLabel+' listeleniyor';
+    if(!list.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><p>Bu klasörde henüz mod yok.</p></div>';return}
+    list.forEach((mod,i)=>{
+      const item=document.createElement('div');
+      item.className='numbered-item';
+      item.style.animation=`scaleIn 0.25s ease ${i*0.03}s both`;
+      item.innerHTML=`<div class="num">${i+1}</div><div class="mod-icon mod-thumb ${mod.color}">${avatarHTML(mod,40)}</div><div class="numbered-info"><h4>${mod.name}</h4><p>${mod.desc}</p></div><div class="numbered-meta">★ ${mod.rating}</div>`;
+      item.addEventListener('click',()=>openModal(mod));
+      cont.appendChild(item);
+    });
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderServerRank(){
+  const listEl=document.getElementById('serverRankList');
+  const emptyEl=document.getElementById('serverRankEmpty');
+  if(!listEl)return;
+  listEl.innerHTML='';
+  const list=sortedServers().slice(0,8);
+  if(!list.length){emptyEl.style.display='block';return}
+  emptyEl.style.display='none';
+  list.forEach((s,i)=>{
+    const item=document.createElement('div');
+    item.className='server-rank-item';
+    item.style.animation=`scaleIn 0.25s ease ${i*0.03}s both`;
+    const tier=playersTier(s.players);
+    const plat=s.platform==='java'?'java':'bedrock';
+    const platLabel=s.platform==='java'?'Java':'Bedrock';
+    item.innerHTML=`<div class="server-rank-num ${i<3?'top'+(i+1):''}">${i+1}</div>${serverAvatarHTML(s,44)}<div class="server-rank-info"><h4>${s.name}</h4><div class="server-rank-meta"><span class="platform-badge ${plat}">${platLabel}</span><span class="players-badge ${tier}">● ${formatPlayers(s.players)}</span>${s.version?`<span class="badge">${s.version}</span>`:''}${s.ip?`<span class="server-ip">${s.ip}</span>`:''}</div></div>`;
+    item.addEventListener('click',()=>openServerModal(s));
+    listEl.appendChild(item);
+  });
+}
+function openServerModal(s){
+  document.getElementById('modalIcon').className='modal-icon';
+  document.getElementById('modalIcon').innerHTML=serverAvatarHTML(s,60);
+  document.getElementById('modalTitle').textContent=s.name;
+  document.getElementById('modalAuthor').textContent=s.ip?('IP: '+s.ip):(s.website||'');
+  document.getElementById('modalDownloads').textContent=formatPlayers(s.players);
+  document.getElementById('modalRating').textContent=s.version||'-';
+  document.getElementById('modalVersion').textContent=s.platform==='java'?'Java':'Bedrock';
+  document.getElementById('modalPlatform').textContent='Sunucu';
+  // labels override for server context
+  const stats=document.querySelectorAll('#modal .stat-label');
+  if(stats[0])stats[0].textContent='Oyuncu';
+  if(stats[1])stats[1].textContent='Sürüm';
+  if(stats[2])stats[2].textContent='Platform';
+  if(stats[3])stats[3].textContent='Tür';
+  document.getElementById('modalDesc').textContent=s.desc||'';
+  document.getElementById('modalFavBtn').style.display='none';
+  currentModUrl=s.website||null;
+  currentServerIp=s.ip||null;
+  const dl=document.getElementById('downloadBtn');
+  if(s.ip){
+    currentModalMode='server-ip';
+    dl.textContent='IP Kopyala';
+  }else if(s.website){
+    currentModalMode='server-web';
+    dl.textContent='Siteye Git';
+  }else{
+    currentModalMode='mod';
+    currentModUrl=null;
+    dl.textContent='Bağlantı yok';
+  }
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+  modalSheet.style.transform='';
+}
 document.getElementById('backToFolders').addEventListener('click',()=>{document.getElementById('catDetailView').style.display='none';document.getElementById('catFoldersView').style.display='block'});
 function renderFavorites(){favGrid.innerHTML='';const favs=mods.filter(m=>isFav(m.id));favEmpty.style.display=favs.length?'none':'block';favs.forEach((m,i)=>favGrid.appendChild(createModCard(m,i)))}
 let searchPlatform='all',searchSort='popular';
@@ -371,7 +511,34 @@ document.querySelectorAll('#searchFilters .filter-chip').forEach(chip=>{
   });
 });
 function renderAll(){renderHomeMods();renderFeatured();renderFavorites();if(currentPage==='search')renderSearch(document.getElementById('fullSearch').value)}
-function openModal(mod){document.getElementById('modalIcon').className='modal-icon';document.getElementById('modalIcon').innerHTML=avatarHTML(mod,60);document.getElementById('modalTitle').textContent=mod.name;document.getElementById('modalAuthor').textContent='Geliştirici: '+mod.author;document.getElementById('modalDownloads').textContent=mod.downloads;document.getElementById('modalRating').textContent=mod.rating;document.getElementById('modalVersion').textContent=mod.version;const platformLabels={javaclient:'Java Client',bedrock:'Bedrock',bedrocktexture:'Texturepack',javaplugin:'Plugin'};document.getElementById('modalPlatform').textContent=platformLabels[mod.platform]||mod.platform;document.getElementById('modalDesc').textContent=mod.desc;document.getElementById('modalFavBtn').dataset.id=mod.id;currentModUrl=mod.url||null;updateModalFavBtn();modal.classList.add('open');document.body.style.overflow='hidden';modalSheet.style.transform=''}
+function openModal(mod){
+  document.getElementById('modalIcon').className='modal-icon';
+  document.getElementById('modalIcon').innerHTML=avatarHTML(mod,60);
+  document.getElementById('modalTitle').textContent=mod.name;
+  document.getElementById('modalAuthor').textContent='Geliştirici: '+mod.author;
+  document.getElementById('modalDownloads').textContent=mod.downloads;
+  document.getElementById('modalRating').textContent=mod.rating;
+  document.getElementById('modalVersion').textContent=mod.version;
+  const platformLabels={javaclient:'Java Client',bedrock:'Bedrock',bedrocktexture:'Texturepack',javaplugin:'Plugin'};
+  document.getElementById('modalPlatform').textContent=platformLabels[mod.platform]||mod.platform;
+  const stats=document.querySelectorAll('#modal .stat-label');
+  if(stats[0])stats[0].textContent='İndirme';
+  if(stats[1])stats[1].textContent='Puan';
+  if(stats[2])stats[2].textContent='Sürüm';
+  if(stats[3])stats[3].textContent='Platform';
+  document.getElementById('modalDesc').textContent=mod.desc;
+  document.getElementById('modalFavBtn').style.display='';
+  document.getElementById('modalFavBtn').dataset.id=mod.id;
+  currentModUrl=mod.url||null;
+  currentServerIp=null;
+  currentModalMode='mod';
+  const dl=document.getElementById('downloadBtn');
+  dl.textContent='İndir';
+  updateModalFavBtn();
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+  modalSheet.style.transform='';
+}
 function updateModalFavBtn(){const b=document.getElementById('modalFavBtn');b.textContent=isFav(+b.dataset.id)?'Favorilerden Çıkar':'Favorilere Ekle'}
 function closeModal(){modal.classList.remove('open');document.body.style.overflow='';modalSheet.style.transform='';modalSheet.classList.remove('dragging')}
 let startY=0,currentY=0,isDragging=false;
@@ -383,12 +550,31 @@ function updateIndicator(i){navIndicator.style.transform=`translateX(${i*100}%)`
 function switchPage(page){if(page===currentPage)return;currentPage=page;document.querySelectorAll('.bottom-item').forEach(item=>{const a=item.dataset.page===page;item.classList.toggle('active',a);if(a)updateIndicator(+item.dataset.index)});document.querySelectorAll('.nav-link').forEach(l=>l.classList.toggle('active',l.dataset.page===page));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const t=document.getElementById('page-'+page);if(t)t.classList.add('active');if(page==='categories'){document.getElementById('catDetailView').style.display='none';document.getElementById('catFoldersView').style.display='block';renderCategories()}if(page==='favorites')renderFavorites();if(page==='search'){renderSearch();setTimeout(()=>document.getElementById('fullSearch')?.focus(),60);}window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.bottom-item').forEach(i=>i.addEventListener('click',()=>switchPage(i.dataset.page)));
 document.querySelectorAll('[data-page]').forEach(el=>{if(el.classList.contains('bottom-item'))return;el.addEventListener('click',e=>{e.preventDefault();switchPage(el.dataset.page)})});
+document.getElementById('seeAllServers')?.addEventListener('click',e=>{
+  e.preventDefault();
+  switchPage('categories');
+  const serversCat=categories.find(c=>c.id==='servers');
+  if(serversCat)setTimeout(()=>openCategory(serversCat),50);
+});
 document.getElementById('headerSearch').addEventListener('input',e=>{if(e.target.value.trim()){switchPage('search');document.getElementById('fullSearch').value=e.target.value;renderSearch(e.target.value)}});
 document.getElementById('fullSearch').addEventListener('input',e=>renderSearch(e.target.value));
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
 let currentModUrl=null;
+let currentModalMode='mod'; // 'mod' | 'server-ip' | 'server-web'
+let currentServerIp=null;
 document.getElementById('downloadBtn').addEventListener('click',()=>{
   const b=document.getElementById('downloadBtn');
+  if(currentModalMode==='server-ip' && currentServerIp){
+    navigator.clipboard.writeText(currentServerIp).then(()=>{
+      b.textContent='Kopyalandı!';
+      setTimeout(()=>{b.textContent='IP Kopyala'},1200);
+    }).catch(()=>{b.textContent='Kopyalanamadı';setTimeout(()=>{b.textContent='IP Kopyala'},1200)});
+    return;
+  }
+  if(currentModalMode==='server-web' && currentModUrl){
+    window.open(currentModUrl,'_blank','noopener');
+    return;
+  }
   if(currentModUrl){
     b.textContent='İndiriliyor...';
     const a=document.createElement('a');

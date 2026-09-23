@@ -40,7 +40,7 @@ a{color:var(--accent)}
 <body>
 <div class="wrap">
   <h1>Modio Admin</h1>
-  <div class="sub">Buradan eklediğin her mod, GitHub reponu güncelleyip anında siteye düşer.</div>
+  <div class="sub">Buradan eklediğin her mod ve sunucu, GitHub reponu güncelleyip anında siteye düşer. Sunucular <code>data/servers.json</code> dosyasında tutulur.</div>
 
   <div class="card">
     <h2>1. GitHub Bağlantısı</h2>
@@ -107,6 +107,49 @@ a{color:var(--accent)}
   <div class="card">
     <h2>Mevcut Modlar</h2>
     <div id="modList" class="hint">Yükleniyor...</div>
+  </div>
+
+  <div class="card">
+    <h2>3. Yeni Sunucu Ekle</h2>
+    <label>Sunucu Adı</label>
+    <input id="sName" placeholder="Örn. Hypixel">
+    <label>Detaylı Açıklama</label>
+    <textarea id="sDesc" placeholder="Sunucu hakkında detaylı bilgi, oyun modları, kurallar vb."></textarea>
+    <div class="row2">
+      <div><label>Platform</label>
+        <select id="sPlatform">
+          <option value="java">Java</option>
+          <option value="bedrock">Bedrock</option>
+        </select>
+      </div>
+      <div><label>Renk (avatar)</label>
+        <select id="sColor">
+          <option value="blue">Mavi</option>
+          <option value="orange">Turuncu</option>
+          <option value="purple">Mor</option>
+          <option value="teal">Turkuaz</option>
+          <option value="rose">Pembe</option>
+          <option value="green">Yeşil</option>
+        </select>
+      </div>
+    </div>
+    <div class="row2">
+      <div><label>Sürüm</label><input id="sVersion" placeholder="1.21.1"></div>
+      <div><label>Aktif Oyuncu (sayı)</label><input id="sPlayers" type="number" placeholder="1200" min="0"></div>
+    </div>
+    <label>Sunucu IP</label>
+    <input id="sIp" placeholder="mc.ornek.net">
+    <label>Web sitesi (isteğe bağlı)</label>
+    <input id="sWebsite" placeholder="https://...">
+    <label>İkon (isteğe bağlı)</label>
+    <input id="sIcon" type="file" accept="image/*">
+    <button class="btn" id="submitServerBtn">Sunucuyu Ekle</button>
+    <div class="log" id="serverLog"></div>
+  </div>
+
+  <div class="card">
+    <h2>Mevcut Sunucular</h2>
+    <div id="serverList" class="hint">Yükleniyor...</div>
   </div>
 
   <div class="hint" style="text-align:center;margin-top:10px"><a href="index.html">← Siteye dön</a></div>
@@ -314,6 +357,109 @@ document.getElementById('submitBtn').addEventListener('click',async()=>{
 });
 
 renderModList();
+
+function serverLog(msg,type){
+  const el=document.getElementById('serverLog');
+  el.textContent=msg;
+  el.className='log show'+(type?' '+type:'');
+}
+
+async function loadServersJson(){
+  const file=await ghGet('data/servers.json');
+  if(!file)return {servers:[],sha:null};
+  return {servers:JSON.parse(base64ToText(file.content)),sha:file.sha};
+}
+
+async function renderServerList(){
+  const listEl=document.getElementById('serverList');
+  try{
+    const {servers}=await loadServersJson();
+    if(!servers.length){listEl.textContent='Henüz sunucu eklenmemiş.';listEl.className='hint';return;}
+    listEl.innerHTML='';
+    listEl.className='';
+    const sorted=[...servers].sort((a,b)=>(Number(b.players)||0)-(Number(a.players)||0));
+    sorted.forEach(s=>{
+      const row=document.createElement('div');
+      row.className='mod-row';
+      row.innerHTML=`<div class="info"><b>${s.name}</b><span>${s.platform} · v${s.version||'-'} · ${s.players||0} oyuncu${s.ip?' · '+s.ip:''}</span></div><button class="btn btn-danger btn-small" data-id="${s.id}">Sil</button>`;
+      row.querySelector('button').addEventListener('click',()=>deleteServer(s.id));
+      listEl.appendChild(row);
+    });
+  }catch(e){
+    listEl.textContent='Liste alınamadı: '+e.message;
+  }
+}
+
+async function deleteServer(id){
+  if(!confirm('Bu sunucuyu silmek istediğine emin misin?'))return;
+  try{
+    serverLog('Siliniyor...');
+    const {servers,sha}=await loadServersJson();
+    const target=servers.find(s=>s.id===id);
+    const remaining=servers.filter(s=>s.id!==id);
+    await ghPut('data/servers.json',textToBase64(JSON.stringify(remaining,null,2)),sha,'Modio: sunucu silindi ('+(target?target.name:id)+')');
+    serverLog('Sunucu silindi.','ok');
+    renderServerList();
+  }catch(e){
+    serverLog('Hata: '+e.message,'err');
+  }
+}
+
+document.getElementById('submitServerBtn').addEventListener('click',async()=>{
+  const c=cfg();
+  if(!c.owner||!c.repo||!c.token){serverLog('Önce GitHub bilgilerini ve token bilgisini gir.','err');return;}
+
+  const name=document.getElementById('sName').value.trim();
+  const desc=document.getElementById('sDesc').value.trim();
+  const platform=document.getElementById('sPlatform').value;
+  const color=document.getElementById('sColor').value;
+  const version=document.getElementById('sVersion').value.trim()||'-';
+  const players=parseInt(document.getElementById('sPlayers').value,10)||0;
+  const ip=document.getElementById('sIp').value.trim();
+  const website=document.getElementById('sWebsite').value.trim();
+  const iconInput=document.getElementById('sIcon').files[0];
+
+  if(!name){serverLog('Sunucu adı zorunlu.','err');return;}
+
+  const btn=document.getElementById('submitServerBtn');
+  btn.disabled=true;
+
+  try{
+    const slug=slugify(name);
+    let iconUrl=null;
+
+    if(iconInput){
+      serverLog('İkon yükleniyor...');
+      const ext=iconInput.name.split('.').pop();
+      const path=`icons/server-${slug}.${ext}`;
+      const existing=await ghGet(path);
+      const base64=await fileToBase64(iconInput);
+      await ghPut(path,base64,existing?existing.sha:null,'Modio: '+name+' sunucu ikonu eklendi');
+      iconUrl=`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${path}`;
+    }
+
+    serverLog('Sunucu listesi güncelleniyor...');
+    const {servers,sha}=await loadServersJson();
+    const newId=servers.length?Math.max(...servers.map(s=>s.id))+1:1;
+    const newServer={id:newId,name,desc,platform,color,version,players};
+    if(ip)newServer.ip=ip;
+    if(website)newServer.website=website;
+    if(iconUrl)newServer.icon=iconUrl;
+    servers.push(newServer);
+    await ghPut('data/servers.json',textToBase64(JSON.stringify(servers,null,2)),sha||undefined,'Modio: yeni sunucu eklendi ('+name+')');
+
+    serverLog('"'+name+'" başarıyla eklendi! Siteyi yenileyince görünecek.','ok');
+    ['sName','sDesc','sVersion','sPlayers','sIp','sWebsite'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('sIcon').value='';
+    renderServerList();
+  }catch(e){
+    serverLog('Hata: '+e.message,'err');
+  }finally{
+    btn.disabled=false;
+  }
+});
+
+renderServerList();
 </script>
 </body>
 </html>
