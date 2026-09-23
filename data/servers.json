@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Aesirmc",
+    "desc": "🏹 AesirMC | Türk Minecraft MMORPG Sunucusu\n\nAesirMC, Minecraft'ı klasik Survival'ın ötesine taşıyan Türkçe bir MMORPG sunucusudur. Towny, MMORPG, Faction, Skyblock, BoxPvP, Prison ve MiniGame gibi farklı oyun modlarıyla geniş bir Minecraft deneyimi sunar.\n\n⚔️ Özel eşyalar, yetenekler, bosslar, petler, ekonomi, PvP ve görevlerle karakterini geliştir, dünyayı keşfet ve diğer oyuncularla rekabet et.",
+    "platform": "java",
+    "color": "blue",
+    "version": "26.2",
+    "players": 2654,
+    "ip": "play.aesirmc.com",
+    "website": "https://aesirmc.com",
+    "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/server-aesirmc.png"
+  }
+]
