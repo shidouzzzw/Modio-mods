@@ -27,5 +27,20 @@
     "url": "https://www.mediafire.com/file/txthgecpcibmh3u/ThatMob's+Verity+4.0.0+by+PnTMC+[Add-on]+-+V26.50.mcaddon/file",
     "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/verity-bedrock-edition.png",
     "iconSmall": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/verity-bedrock-edition-small.png"
+  },
+  {
+    "id": 3,
+    "name": "Actions and Stuff:2.0",
+    "desc": "Actions & Stuff, Minecraft Bedrock Edition için oyuna daha gelişmiş animasyonlar ve görsel detaylar ekleyen bir add-on'dur. Oyuncu, moblar, eşyalar ve çeşitli hareketler için daha akıcı ve canlı animasyonlar sunarak Minecraft deneyimini daha gerçekçi ve eğlenceli hale getirir.",
+    "platform": "bedrocktexture",
+    "color": "blue",
+    "downloads": "5.4M",
+    "rating": "4.9",
+    "version": "1.21.120+",
+    "author": "Oreville Studios",
+    "size": "18MB",
+    "url": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/mods/actions-and-stuff-2-0.zip",
+    "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/actions-and-stuff-2-0.jpg",
+    "iconSmall": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/actions-and-stuff-2-0-small.webp"
   }
 ]
