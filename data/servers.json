@@ -10,5 +10,16 @@
     "ip": "play.aesirmc.com",
     "website": "https://aesirmc.com",
     "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/server-aesirmc.png"
+  },
+  {
+    "id": 2,
+    "name": "Mcdirenis",
+    "desc": "🌍 MCDirenis SMP\n\nMCDirenis, arkadaşlarınla birlikte oynayabileceğin eğlenceli ve özgür bir Minecraft SMP sunucusudur!\n\n🏠 Kendi üssünü kur\n⚔️ PvP ve rekabet\n🌲 Survival dünyasını keşfet\n💰 Ekonomi ve ticaret\n🤝 Oyuncularla takım kur\n🎉 Etkinliklere katıl\n\nKendi maceranı oluştur, arkadaşlarınla eğlen ve MCDirenis dünyasında kendi hikâyeni yaz!",
+    "platform": "java",
+    "color": "blue",
+    "version": "26.2",
+    "players": 6,
+    "ip": "play.aynetwork.com.tr",
+    "icon": "https://raw.githubusercontent.com/shidouzzzw/Modio-mods/main/icons/server-mcdirenis.jpg"
   }
 ]
