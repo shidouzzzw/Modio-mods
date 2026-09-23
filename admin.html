@@ -23,6 +23,7 @@ textarea{resize:vertical;min-height:70px}
 .btn{display:block;width:100%;padding:13px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-top:18px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .btn-danger{background:var(--danger)}
+.btn-secondary{background:var(--border);color:var(--text)}
 .btn-small{width:auto;padding:7px 12px;font-size:12px;margin-top:0}
 .log{margin-top:14px;font-size:13px;padding:10px 12px;border-radius:10px;background:#f5f5f7;color:var(--text-secondary);white-space:pre-wrap;display:none}
 .log.show{display:block}
@@ -56,7 +57,7 @@ a{color:var(--accent)}
   </div>
 
   <div class="card">
-    <h2>2. Yeni Mod Ekle</h2>
+    <h2 id="modFormTitle">2. Yeni Mod Ekle</h2>
     <label>Mod Adı</label>
     <input id="fName" placeholder="Örn. Better on Bedrock">
     <label>Açıklama</label>
@@ -89,8 +90,13 @@ a{color:var(--accent)}
       <div><label>İndirme sayısı (gösterim)</label><input id="fDownloads" placeholder="1.2M"></div>
       <div><label>Puan (gösterim)</label><input id="fRating" placeholder="4.5"></div>
     </div>
+    <div class="row2">
+      <div><label>Dosya Boyutu (ör. 13 MB)</label><input id="fSize" placeholder="13 MB"></div>
+      <div></div>
+    </div>
     <label>Mod Dosyası (.mcpack / .jar / .zip)</label>
     <input id="fFile" type="file">
+    <div class="hint">Bir dosya seçmezsen (harici link kullanıyorsan), mevcut dosya bağlantısı korunur.</div>
     <label>Büyük İkon (kart/öne çıkanlar için, geniş görsel — ör. 800x450)</label>
     <input id="fIcon" type="file" accept="image/*">
     <div class="hint">Ana sayfa kartında ve öne çıkanlarda tüm alanı kaplar, yatay/geniş bir görsel kullan.</div>
@@ -101,6 +107,7 @@ a{color:var(--accent)}
     <input id="fExternalUrl" placeholder="https://...">
 
     <button class="btn" id="submitBtn">Modu Ekle</button>
+    <button class="btn btn-secondary" id="cancelEditBtn" style="display:none">Düzenlemeyi İptal Et</button>
     <div class="log" id="log"></div>
   </div>
 
@@ -250,8 +257,9 @@ async function renderModList(){
     mods.forEach(m=>{
       const row=document.createElement('div');
       row.className='mod-row';
-      row.innerHTML=`<div class="info"><b>${m.name}</b><span>${m.platform} · v${m.version}</span></div><button class="btn btn-danger btn-small" data-id="${m.id}">Sil</button>`;
-      row.querySelector('button').addEventListener('click',()=>deleteMod(m.id));
+      row.innerHTML=`<div class="info"><b>${m.name}</b><span>${m.platform} · v${m.version}${m.size?' · '+m.size:''}</span></div><div style="display:flex;gap:6px"><button class="btn btn-secondary btn-small" data-act="edit">Düzenle</button><button class="btn btn-danger btn-small" data-act="del">Sil</button></div>`;
+      row.querySelector('[data-act="del"]').addEventListener('click',()=>deleteMod(m.id));
+      row.querySelector('[data-act="edit"]').addEventListener('click',()=>startEditMod(m));
       listEl.appendChild(row);
     });
   }catch(e){
@@ -274,6 +282,43 @@ async function deleteMod(id){
   }
 }
 
+let editingModId=null;
+
+function startEditMod(m){
+  editingModId=m.id;
+  document.getElementById('fName').value=m.name||'';
+  document.getElementById('fDesc').value=m.desc||'';
+  document.getElementById('fPlatform').value=m.platform||'bedrock';
+  document.getElementById('fColor').value=m.color||'blue';
+  document.getElementById('fVersion').value=m.version&&m.version!=='-'?m.version:'';
+  document.getElementById('fAuthor').value=m.author&&m.author!=='Bilinmiyor'?m.author:'';
+  document.getElementById('fDownloads').value=m.downloads&&m.downloads!=='0'?m.downloads:'';
+  document.getElementById('fRating').value=m.rating&&m.rating!=='-'?m.rating:'';
+  document.getElementById('fSize').value=m.size||'';
+  document.getElementById('fExternalUrl').value=m.url&&!m.url.includes('raw.githubusercontent.com')?m.url:'';
+  document.getElementById('fFile').value='';
+  document.getElementById('fIcon').value='';
+  document.getElementById('fIconSmall').value='';
+  document.getElementById('modFormTitle').textContent='Modu Düzenle: '+m.name;
+  document.getElementById('submitBtn').textContent='Değişiklikleri Kaydet';
+  document.getElementById('cancelEditBtn').style.display='block';
+  log('');
+  document.getElementById('modFormTitle').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function cancelEditMod(){
+  editingModId=null;
+  ['fName','fDesc','fVersion','fAuthor','fDownloads','fRating','fSize','fExternalUrl'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fFile').value='';
+  document.getElementById('fIcon').value='';
+  document.getElementById('fIconSmall').value='';
+  document.getElementById('modFormTitle').textContent='2. Yeni Mod Ekle';
+  document.getElementById('submitBtn').textContent='Modu Ekle';
+  document.getElementById('cancelEditBtn').style.display='none';
+  log('');
+}
+document.getElementById('cancelEditBtn').addEventListener('click',cancelEditMod);
+
 document.getElementById('submitBtn').addEventListener('click',async()=>{
   const c=cfg();
   if(!c.owner||!c.repo||!c.token){log('Önce GitHub bilgilerini ve token bilgisini gir.','err');return;}
@@ -286,13 +331,14 @@ document.getElementById('submitBtn').addEventListener('click',async()=>{
   const author=document.getElementById('fAuthor').value.trim()||'Bilinmiyor';
   const downloads=document.getElementById('fDownloads').value.trim()||'0';
   const rating=document.getElementById('fRating').value.trim()||'-';
+  const size=document.getElementById('fSize').value.trim();
   const externalUrl=document.getElementById('fExternalUrl').value.trim();
   const fileInput=document.getElementById('fFile').files[0];
   const iconInput=document.getElementById('fIcon').files[0];
   const iconSmallInput=document.getElementById('fIconSmall').files[0];
 
   if(!name){log('Mod adı zorunlu.','err');return;}
-  if(!fileInput && !externalUrl){log('Ya bir dosya seç ya da harici link gir.','err');return;}
+  if(!editingModId && !fileInput && !externalUrl){log('Ya bir dosya seç ya da harici link gir.','err');return;}
 
   const btn=document.getElementById('submitBtn');
   btn.disabled=true;
@@ -335,19 +381,35 @@ document.getElementById('submitBtn').addEventListener('click',async()=>{
 
     log('Mod listesi güncelleniyor...');
     const {mods,sha}=await loadModsJson();
-    const newId=mods.length?Math.max(...mods.map(m=>m.id))+1:1;
-    const newMod={id:newId,name,desc,platform,color,downloads,rating,version,author};
-    if(modUrl)newMod.url=modUrl;
-    if(iconUrl)newMod.icon=iconUrl;
-    if(iconSmallUrl)newMod.iconSmall=iconSmallUrl;
-    mods.push(newMod);
-    await ghPut('data/mods.json',textToBase64(JSON.stringify(mods,null,2)),sha,'Modio: yeni mod eklendi ('+name+')');
 
-    log('"'+name+'" başarıyla eklendi! Siteyi yenileyince görünecek.','ok');
-    ['fName','fDesc','fVersion','fAuthor','fDownloads','fRating','fExternalUrl'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('fFile').value='';
-    document.getElementById('fIcon').value='';
-    document.getElementById('fIconSmall').value='';
+    if(editingModId){
+      const idx=mods.findIndex(m=>m.id===editingModId);
+      if(idx===-1)throw new Error('Düzenlenecek mod bulunamadı, silinmiş olabilir.');
+      const existingMod=mods[idx];
+      const updated={...existingMod,name,desc,platform,color,downloads,rating,version,author};
+      if(size)updated.size=size;else delete updated.size;
+      if(modUrl)updated.url=modUrl;
+      if(iconUrl)updated.icon=iconUrl;
+      if(iconSmallUrl)updated.iconSmall=iconSmallUrl;
+      mods[idx]=updated;
+      await ghPut('data/mods.json',textToBase64(JSON.stringify(mods,null,2)),sha,'Modio: mod güncellendi ('+name+')');
+      log('"'+name+'" güncellendi! Siteyi yenileyince görünecek.','ok');
+      cancelEditMod();
+    }else{
+      const newId=mods.length?Math.max(...mods.map(m=>m.id))+1:1;
+      const newMod={id:newId,name,desc,platform,color,downloads,rating,version,author};
+      if(size)newMod.size=size;
+      if(modUrl)newMod.url=modUrl;
+      if(iconUrl)newMod.icon=iconUrl;
+      if(iconSmallUrl)newMod.iconSmall=iconSmallUrl;
+      mods.push(newMod);
+      await ghPut('data/mods.json',textToBase64(JSON.stringify(mods,null,2)),sha,'Modio: yeni mod eklendi ('+name+')');
+      log('"'+name+'" başarıyla eklendi! Siteyi yenileyince görünecek.','ok');
+      ['fName','fDesc','fVersion','fAuthor','fDownloads','fRating','fSize','fExternalUrl'].forEach(id=>document.getElementById(id).value='');
+      document.getElementById('fFile').value='';
+      document.getElementById('fIcon').value='';
+      document.getElementById('fIconSmall').value='';
+    }
     renderModList();
   }catch(e){
     log('Hata: '+e.message,'err');
